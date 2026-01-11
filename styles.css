@@ -1,0 +1,414 @@
+/* Basic reset */
+html, body { overflow-x: hidden; }
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #111;
+  background: #fff;
+}
+
+a { color: inherit; text-decoration: none; }
+
+/* Container — wider so the grid can feel “big” and centered */
+.container {
+  width: min(1400px, 94%);
+  margin: 0 auto;
+  padding: 56px 0 70px;
+}
+
+/* Section title centered */
+.section-title {
+  text-align: center;
+  margin: 10px 0 44px;
+  font-size: 34px;
+  letter-spacing: 1px;
+  font-weight: 900;
+}
+
+/* ===================== DISCOGRAPHY GRID (BIG + CENTERED) ===================== */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 48px 42px;            /* row-gap col-gap */
+  justify-items: center;     /* center each tile in its cell */
+  align-items: start;
+}
+
+/* Responsive fallback */
+@media (max-width: 1200px) {
+  .grid { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 850px) {
+  .grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 520px) {
+  .grid { grid-template-columns: 1fr; }
+}
+
+/* Tile */
+.tile {
+  width: 100%;
+  max-width: 270px;          /* makes covers bigger */
+}
+
+/* Big square cover */
+.tile img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  display: block;
+}
+
+/* Meta text under cover */
+.meta {
+  padding-top: 16px;
+}
+
+/* SONG TITLE */
+.title {
+  font-size: 18px;
+  font-weight: 800;
+  line-height: 1.25;
+  margin-bottom: 6px;
+}
+
+/* ARTIST NAME — clearly separated */
+.artist { 
+    display: block; 
+    margin-bottom: 12px;
+}
+
+
+/* ROLE */
+.role {
+  font-size: 13px;
+  font-weight: 700;
+  opacity: 0.85;
+  margin-top: 2px;
+}
+
+/* Hover underline (not always underlined) */
+.title,
+.artist,
+.role {
+  text-decoration: none;
+}
+
+.tile:hover .title,
+.tile:hover .artist,
+.tile:hover .role {
+  text-decoration: underline;
+}
+
+/* Hover: underline*/
+.tile:hover .artist,
+.tile:hover .title,
+.tile:hover .role {
+  text-decoration: underline;
+}
+
+/* ===================== NAME BLOCK ===================== */
+.name-block {
+  --edge-gap: 38px;
+  width: 100%;
+  background: #0b0b0b;
+  color: #fff;
+  padding: 90px 0 var(--edge-gap);
+  overflow: hidden;
+  position: relative;
+}
+
+.name-inner {
+  width: min(1200px, 92%);
+  margin: 0 auto;
+}
+
+/* Top-right NAV on HOME */
+.name-nav {
+  position: absolute;
+  top: var(--edge-gap, 38px);
+  right: 4%;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  white-space: nowrap;
+}
+
+.name-nav .nav-link {
+  display: inline-block;
+  padding: 6px 0;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 800;
+  letter-spacing: 2px;
+  font-size: 13px;
+  opacity: 0.9;
+  text-transform: uppercase;
+}
+
+.name-nav .nav-link + .nav-link { margin-left: 28px; }
+
+.name-nav .nav-link:hover {
+  opacity: 1;
+  text-decoration: underline;
+}
+
+.name-title {
+  margin: 0 0 18px;
+  font-size: clamp(48px, 7vw, 96px);
+  font-weight: 900;
+  letter-spacing: -1px;
+  line-height: 0.95;
+}
+
+.name-subtitle {
+  margin: 0;
+  font-weight: 800;
+  letter-spacing: 2px;
+  font-size: 14px;
+  opacity: 0.9;
+  text-transform: uppercase;
+}
+
+
+/* Social icons row */
+.social-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 26px;   /* MORE space below subtitle */
+}
+
+/* Icon button */
+.social-row .icon {
+  width: 38px;        /* smaller circle */
+  height: 38px;
+  border: 1px solid rgba(255,255,255,0.6);
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  flex-shrink: 0;     /* prevents squishing */
+}
+
+.social-row .icon:hover {
+  border-color: #fff;
+}
+
+/* Icon image */
+.social-row .icon img {
+  width: 18px;        /* smaller logo */
+  height: 18px;
+  object-fit: contain;
+  display: block;
+ /* if icons are black   filter: invert(1); */
+}
+
+
+/* Mobile tweaks */
+@media (max-width: 720px) {
+  .name-block { padding: 70px 0 60px; }
+
+  .name-nav {
+    position: static;
+    margin-bottom: 26px;
+    justify-content: flex-start;
+    white-space: normal;
+  }
+
+  .name-nav .nav-link + .nav-link { margin-left: 18px; }
+
+  .tile { max-width: 320px; }  /* keep tiles big on mobile */
+}
+
+/* ===================== INTERNAL PAGES HEADER (ABOUT / DISCOGRAPHY / CONTACT) ===================== */
+.page-header {
+  background: #0b0b0b;
+  color: #fff;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.page-inner {
+  width: min(1200px, 92%);
+  margin: 0 auto;
+  height: 74px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.page-brand {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 900;
+  letter-spacing: 2px;
+  font-size: 14px;
+}
+
+.page-nav {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  white-space: nowrap;
+}
+
+.page-nav .nav-link {
+  display: inline-block;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 800;
+  letter-spacing: 2px;
+  font-size: 13px;
+  opacity: 0.85;
+  text-transform: uppercase;
+  padding: 6px 0;
+}
+
+.page-nav .nav-link + .nav-link { margin-left: 28px; }
+
+.page-nav .nav-link:hover {
+  opacity: 1;
+  text-decoration: underline;
+}
+
+.page-nav .nav-link.active {
+  opacity: 1;
+  text-decoration: underline;
+}
+
+.page-content {
+  padding-top: 48px;
+  padding-bottom: 70px;
+}
+
+.page-title {
+  margin: 0 0 18px;
+  font-size: clamp(34px, 4vw, 52px);
+  letter-spacing: 1px;
+}
+
+.page-text {
+  font-size: 16px;
+  line-height: 1.7;
+  max-width: 750px;
+}
+
+/* Mobile nav wrap */
+@media (max-width: 720px) {
+  .page-inner {
+    height: auto;
+    padding: 16px 0;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .page-nav {
+    flex-wrap: wrap;
+    white-space: normal;
+  }
+
+  .page-nav .nav-link + .nav-link { margin-left: 18px; }
+}
+
+/* ===================== FULL DISCOGRAPHY TABLE ===================== */
+
+.discography-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 40px;
+  font-size: 15px;
+}
+
+/* Header */
+.discography-table thead th {
+  text-align: left;
+  font-weight: 900;
+  letter-spacing: 1px;
+  padding-bottom: 14px;
+  border-bottom: 2px solid #111;
+}
+
+/* Rows */
+.discography-table tbody tr {
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+
+.discography-table td {
+  padding: 14px 0;
+  vertical-align: middle;
+}
+
+/* Artist column */
+.discography-table .artist {
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  text-transform: capitalize;
+}
+
+/* Song column */
+.discography-table .song a {
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.discography-table .song a:hover {
+  text-decoration: underline;
+}
+
+/* Role column */
+.discography-table .role {
+  font-weight: 700;
+  opacity: 0.8;
+  text-transform: lowercase;
+}
+
+/* Year column */
+.discography-table .year {
+  font-weight: 700;
+  text-align: right;
+}
+
+/* Legend */
+.role-legend {
+  margin-top: 28px;
+  font-size: 13px;
+  opacity: 0.8;
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+/* Align YEAR header with year values */
+.discography-table thead th:last-child {
+  text-align: right;
+}
+
+
+/* ===================== MOBILE ===================== */
+@media (max-width: 720px) {
+  .discography-table {
+    font-size: 14px;
+  }
+
+  .discography-table thead {
+    display: none;
+  }
+
+  .discography-table tr {
+    display: block;
+    padding: 12px 0;
+  }
+
+  .discography-table td {
+    display: block;
+    padding: 4px 0;
+  }
+
+  .discography-table .year {
+    text-align: left;
+  }
+}

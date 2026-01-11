@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aidin Nortje</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <!-- Name block (black container) -->
+  <section class="name-block">
+    <div class="name-inner">
+      <nav class="name-nav" aria-label="Site navigation">
+        <a class="nav-link" href="about.html">ABOUT</a>
+        <a class="nav-link" href="discography.html">FULL DISCOGRAPHY</a>
+        <a class="nav-link" href="contact.html">CONTACT</a>
+      </nav>
+
+      <h1 class="name-title">Aidin Nortje</h1>
+
+      <p class="name-subtitle">
+        PRODUCER • SONGWRITER • MIXING & MASTERING ENGINEER
+      </p>
+
+      <div class="social-row" aria-label="Social links">
+  <!-- Instagram -->
+  <a class="icon" href="https://www.instagram.com/aidin.nortje?igsh=aHJrMjNjYTh1aDR3" target="_blank" rel="noreferrer" aria-label="Instagram">
+    <img src="icons/instagram.webp" alt="Instagram">
+  </a>
+
+  <!-- Spotify -->
+  <a class="icon" href="https://open.spotify.com/playlist/4zotRa3n7FXN8Esov5mG9v?si=V38nEeNWR2GVM8ruhIu9Iw" target="_blank" rel="noreferrer" aria-label="Spotify">
+    <img src="icons/spotify.webp" alt="Spotify">
+  </a>
+</div>
+
+    </div>
+  </section>
+
+  <main class="container" id="credits">
+    <h2 class="section-title">SELECT DISCOGRAPHY</h2>
+
+    <!-- IMPORTANT: only ONE grid -->
+    <section class="grid" id="discographyGrid"></section>
+  </main>
+
+<script>
+  const DEFAULT_ROLE = "Writing, Production, Mixing";
+  const WRIT_PROD_MIS_MAS_ROLE = "Writing, Production, Mixing, Mastering";
+  const EVERYTHING_ROLE = "Singing, Songwriting, Production, Mixing, Mastering";
+
+  // ✅ Add artist names here (and optionally titles if you want to override)
+  const releases = [
+    { url: "https://open.spotify.com/track/0xLPuvFdAvOVpLb0DtqSdg", artist: "Ben Rodrigues", role: WRIT_PROD_MIS_MAS_ROLE },
+    { url: "https://open.spotify.com/track/67KTEMcMLq0rrByxzzZku8", artist: "Ben Rodrigues", role: DEFAULT_ROLE },
+    { url: "https://open.spotify.com/track/6e67jV14CqsB6b6cZKoGd6", artist: "Ben Rodrigues", role: DEFAULT_ROLE },
+    { url: "https://open.spotify.com/track/1lmtbdnwqEkrtVQhDQvw1E", artist: "Booshle G", role: DEFAULT_ROLE },
+    { url: "https://open.spotify.com/track/23kB40iILpGJ03qrMTGbyj", artist: "Ben Rodrigues", role: DEFAULT_ROLE },
+    { url: "https://open.spotify.com/track/0HM8upO733cghrlIWcS7hK", artist: "Ben Rodrigues", role: DEFAULT_ROLE },
+    { url: "https://open.spotify.com/track/46XLSMbxnqRAoFTk58lxth", artist: "David Derman", role: DEFAULT_ROLE },
+    { url: "https://open.spotify.com/track/7wI19ThH9yf95MOHcCG6U5", artist: "We Could Be Related, Ben Rodrigues", role: DEFAULT_ROLE },
+    { url: "https://open.spotify.com/track/4Z4xlEo0iuCIp8JCdllzTY", artist: "Eva Marie", role: WRIT_PROD_MIS_MAS_ROLE },
+    { url: "https://open.spotify.com/track/3vgNRcq75TgLBNEHa7l3l7", artist: "Thomas Paul", role: WRIT_PROD_MIS_MAS_ROLE },
+    { url: "https://open.spotify.com/track/4TqFV77SI0u0WtiHsmUQPW", artist: "We Could Be Related", role: EVERYTHING_ROLE },
+    { url: "https://open.spotify.com/track/61Ny7MvlgnOqrIKwxhc11T", artist: "We Could Be Related", role: EVERYTHING_ROLE }
+  ];
+
+  const grid = document.getElementById("discographyGrid");
+
+  async function fetchOEmbed(url) {
+    const res = await fetch(`https://open.spotify.com/oembed?url=${encodeURIComponent(url)}`);
+    if (!res.ok) throw new Error("Failed to fetch Spotify oEmbed");
+    return res.json();
+  }
+
+  async function render() {
+    for (const item of releases) {
+      try {
+        const data = await fetchOEmbed(item.url);
+
+        // ✅ Track name: take from oEmbed title (works reliably)
+        const trackTitle = (data.title || "").trim() || "Untitled";
+
+        // ✅ Artist name: use your manual value (reliable)
+        const artistName = (item.artist || "").trim() || " ";
+
+        const tile = document.createElement("a");
+        tile.className = "tile";
+        tile.href = item.url;
+        tile.target = "_blank";
+        tile.rel = "noreferrer";
+
+        tile.innerHTML = `
+          <img src="${data.thumbnail_url}" alt="${trackTitle}">
+          <div class="meta">
+            <div class="title">${trackTitle}</div>
+            <div class="artist">${artistName}</div>
+            <div class="role">${item.role || DEFAULT_ROLE}</div>
+          </div>
+        `;
+
+        grid.appendChild(tile);
+      } catch (e) {
+        console.warn("Could not load:", item.url, e);
+      }
+    }
+  }
+
+  render();
+</script>
+
+</body>
+</html>
