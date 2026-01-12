@@ -342,6 +342,90 @@ body.is-loaded .name-title {
   font-size: 14px;
 }
 
+/* ===== Blade-split hover for top-left brand ===== */
+.split-brand {
+  position: relative;
+  display: inline-block;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.split-brand__text {
+  position: relative;
+  display: inline-block;
+  font-weight: 900;
+  letter-spacing: 2px;
+  color: #fff;
+  line-height: 1;
+}
+
+/* Two overlay copies */
+.split-brand__text::before,
+.split-brand__text::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  color: #fff;
+  pointer-events: none;
+  transition: transform 260ms ease;
+}
+
+/* Top half */
+.split-brand__text::before {
+  clip-path: polygon(0 0, 100% 0, 100% 52%, 0 52%);
+}
+
+/* Bottom half */
+.split-brand__text::after {
+  clip-path: polygon(0 52%, 100% 52%, 100% 100%, 0 100%);
+}
+
+/* Split ON hover */
+.split-brand:hover .split-brand__text::before,
+.split-brand:focus-visible .split-brand__text::before {
+  transform: translateY(-3px) skewX(-6deg);
+}
+
+.split-brand:hover .split-brand__text::after,
+.split-brand:focus-visible .split-brand__text::after {
+  transform: translateY(3px) skewX(6deg);
+}
+
+/* Optional blade line */
+.split-brand::after {
+  content: "";
+  position: absolute;
+  left: -2px;
+  right: -2px;
+  top: 50%;
+  height: 1px;
+  background: rgba(255,255,255,0);
+  transform: translateY(-50%);
+  transition: background 260ms ease;
+}
+
+.split-brand:hover::after,
+.split-brand:focus-visible::after {
+  background: rgba(255,255,255,0.55);
+}
+
+/* Accessibility */
+.split-brand:focus-visible {
+  outline: 2px solid rgba(255,255,255,0.45);
+  outline-offset: 6px;
+  border-radius: 6px;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .split-brand__text::before,
+  .split-brand__text::after,
+  .split-brand::after {
+    transition: none;
+  }
+}
+
+
 .page-nav {
   display: flex;
   align-items: center;
