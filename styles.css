@@ -204,6 +204,55 @@ a { color: inherit; text-decoration: none; }
   text-transform: uppercase;
 }
 
+/* ===== Hero load animation (title/subtitle/socials) =====
+   Triggered by: body.is-loaded (set in your window.load JS) */
+.name-title,
+.name-subtitle,
+.social-row {
+  opacity: 0;
+  transform: translateY(14px);
+  filter: blur(8px);
+  transition: opacity 700ms ease, transform 700ms ease, filter 700ms ease;
+  will-change: opacity, transform, filter;
+}
+
+/* Make the title feel extra “premium” */
+.name-title {
+  letter-spacing: 6px; /* starts wider on load */
+  transition: opacity 800ms ease, transform 800ms ease, filter 800ms ease, letter-spacing 900ms ease;
+}
+
+/* Reveal state */
+body.is-loaded .name-title,
+body.is-loaded .name-subtitle,
+body.is-loaded .social-row {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+}
+
+/* Tighten title letter spacing at the end */
+body.is-loaded .name-title {
+  letter-spacing: -1px; /* matches your original */
+}
+
+/* Stagger */
+.name-subtitle { transition-delay: 120ms; }
+.social-row    { transition-delay: 220ms; }
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .name-title,
+  .name-subtitle,
+  .social-row {
+    opacity: 1;
+    transform: none;
+    filter: none;
+    transition: none;
+    letter-spacing: inherit;
+  }
+}
+
 
 /* Social icons row */
 .social-row {

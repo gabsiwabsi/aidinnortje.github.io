@@ -23,11 +23,12 @@
         <a class="nav-link" href="contact.html">CONTACT</a>
       </nav>
 
-      <h1 class="name-title">Aidin Nortje</h1>
+      <h1 class="name-title hero-title">Aidin Nortje</h1>
 
-      <p class="name-subtitle">
-        PRODUCER • SONGWRITER • MIXING & MASTERING ENGINEER
-      </p>
+<p class="name-subtitle hero-subtitle">
+  PRODUCER • SONGWRITER • MIXING & MASTERING ENGINEER
+</p>
+
 
       <div class="social-row" aria-label="Social links">
         <!-- Instagram -->
@@ -146,10 +147,13 @@ const observer = new IntersectionObserver(
 
 <script>
   window.addEventListener("load", () => {
+    document.body.classList.add("is-loaded"); // triggers title/subtitle/social reveal slowlY
+
     const loader = document.getElementById("page-loader");
     loader.classList.add("is-hidden");
   });
 </script>
+
 
 </body>
 </html>
