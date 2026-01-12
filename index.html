@@ -25,25 +25,26 @@
       </p>
 
       <div class="social-row" aria-label="Social links">
-  <!-- Instagram -->
-  <a class="icon" href="https://www.instagram.com/aidin.nortje?igsh=aHJrMjNjYTh1aDR3" target="_blank" rel="noreferrer" aria-label="Instagram">
-    <img src="icons/winstagram.webp" alt="Instagram">
-  </a>
+        <!-- Instagram -->
+        <a class="icon" href="https://www.instagram.com/aidin.nortje?igsh=aHJrMjNjYTh1aDR3" target="_blank" rel="noreferrer" aria-label="Instagram">
+          <img src="icons/winstagram.webp" alt="Instagram">
+        </a>
 
-  <a class="icon" href="https://www.tiktok.com/@aidinnortje?_r=1&_t=ZS-930NK9iNa8j" target="_blank" rel="noreferrer" aria-label="Spotify">
-    <img src="icons/wtiktok.webp" alt="TikTok">
-  </a>
-  
-  <a class="icon" href="https://www.youtube.com/@Aidin.Nortje" target="_blank" rel="noreferrer" aria-label="Spotify">
-    <img src="icons/wyoutube.webp" alt="YouTube">
-  </a>
+        <!-- TikTok -->
+        <a class="icon" href="https://www.tiktok.com/@aidinnortje?_r=1&_t=ZS-930NK9iNa8j" target="_blank" rel="noreferrer" aria-label="TikTok">
+          <img src="icons/wtiktok.webp" alt="TikTok">
+        </a>
 
-  <!-- Spotify -->
-  <a class="icon" href="https://open.spotify.com/playlist/4zotRa3n7FXN8Esov5mG9v?si=V38nEeNWR2GVM8ruhIu9Iw" target="_blank" rel="noreferrer" aria-label="Spotify">
-    <img src="icons/wspotify.webp" alt="Spotify">
-  </a>
-</div>
+        <!-- YouTube -->
+        <a class="icon" href="https://www.youtube.com/@Aidin.Nortje" target="_blank" rel="noreferrer" aria-label="YouTube">
+          <img src="icons/wyoutube.webp" alt="YouTube">
+        </a>
 
+        <!-- Spotify -->
+        <a class="icon" href="https://open.spotify.com/playlist/4zotRa3n7FXN8Esov5mG9v?si=V38nEeNWR2GVM8ruhIu9Iw" target="_blank" rel="noreferrer" aria-label="Spotify">
+          <img src="icons/wspotify.webp" alt="Spotify">
+        </a>
+      </div>
     </div>
   </section>
 
@@ -54,71 +55,89 @@
     <section class="grid" id="discographyGrid"></section>
   </main>
 
-<script>
-  const DEFAULT_ROLE = "Writing, Production, Mixing";
-  const WRIT_PROD_MIS_MAS_ROLE = "Writing, Production, Mixing, Mastering";
-  const EVERYTHING_ROLE = "Singing, Songwriting, Production, Mixing, Mastering";
-  const WRITE_PROD_ROLE = "Writing, Production";
+  <script>
+    const DEFAULT_ROLE = "Writing, Production, Mixing";
+    const WRIT_PROD_MIS_MAS_ROLE = "Writing, Production, Mixing, Mastering";
+    const EVERYTHING_ROLE = "Singing, Songwriting, Production, Mixing, Mastering";
+    const WRITE_PROD_ROLE = "Writing, Production";
 
-  // ✅ Add artist names here (and optionally titles if you want to override)
-  const releases = [
-    { url: "https://open.spotify.com/track/0xLPuvFdAvOVpLb0DtqSdg", artist: "Ben Rodrigues", role: WRIT_PROD_MIS_MAS_ROLE },
-    { url: "https://open.spotify.com/track/67KTEMcMLq0rrByxzzZku8", artist: "Ben Rodrigues", role: DEFAULT_ROLE },
-    { url: "https://open.spotify.com/track/6e67jV14CqsB6b6cZKoGd6", artist: "Ben Rodrigues", role: DEFAULT_ROLE },
-    { url: "https://open.spotify.com/track/1lmtbdnwqEkrtVQhDQvw1E", artist: "Booshle G", role: WRITE_PROD_ROLE },
-    { url: "https://open.spotify.com/track/23kB40iILpGJ03qrMTGbyj", artist: "Ben Rodrigues", role: DEFAULT_ROLE },
-    { url: "https://open.spotify.com/track/0HM8upO733cghrlIWcS7hK", artist: "Ben Rodrigues", role: DEFAULT_ROLE },
-    { url: "https://open.spotify.com/track/46XLSMbxnqRAoFTk58lxth", artist: "David Derman", role: DEFAULT_ROLE },
-    { url: "https://open.spotify.com/track/7wI19ThH9yf95MOHcCG6U5", artist: "We Could Be Related, Ben Rodrigues", role: DEFAULT_ROLE },
-    { url: "https://open.spotify.com/track/4Z4xlEo0iuCIp8JCdllzTY", artist: "Eva Marie", role: WRIT_PROD_MIS_MAS_ROLE },
-    { url: "https://open.spotify.com/track/3vgNRcq75TgLBNEHa7l3l7", artist: "Thomas Paul", role: WRIT_PROD_MIS_MAS_ROLE },
-    { url: "https://open.spotify.com/track/4TqFV77SI0u0WtiHsmUQPW", artist: "We Could Be Related", role: EVERYTHING_ROLE },
-    { url: "https://open.spotify.com/track/61Ny7MvlgnOqrIKwxhc11T", artist: "We Could Be Related", role: EVERYTHING_ROLE }
-  ];
+    // Add artist names here (and optionally titles if you want to override)
+    const releases = [
+      { url: "https://open.spotify.com/track/0xLPuvFdAvOVpLb0DtqSdg", artist: "Ben Rodrigues", role: WRIT_PROD_MIS_MAS_ROLE },
+      { url: "https://open.spotify.com/track/67KTEMcMLq0rrByxzzZku8", artist: "Ben Rodrigues", role: DEFAULT_ROLE },
+      { url: "https://open.spotify.com/track/6e67jV14CqsB6b6cZKoGd6", artist: "Ben Rodrigues", role: DEFAULT_ROLE },
+      { url: "https://open.spotify.com/track/1lmtbdnwqEkrtVQhDQvw1E", artist: "Booshle G", role: WRITE_PROD_ROLE },
+      { url: "https://open.spotify.com/track/23kB40iILpGJ03qrMTGbyj", artist: "Ben Rodrigues", role: DEFAULT_ROLE },
+      { url: "https://open.spotify.com/track/0HM8upO733cghrlIWcS7hK", artist: "Ben Rodrigues", role: DEFAULT_ROLE },
+      { url: "https://open.spotify.com/track/46XLSMbxnqRAoFTk58lxth", artist: "David Derman", role: DEFAULT_ROLE },
+      { url: "https://open.spotify.com/track/7wI19ThH9yf95MOHcCG6U5", artist: "We Could Be Related, Ben Rodrigues", role: DEFAULT_ROLE },
+      { url: "https://open.spotify.com/track/4Z4xlEo0iuCIp8JCdllzTY", artist: "Eva Marie", role: WRIT_PROD_MIS_MAS_ROLE },
+      { url: "https://open.spotify.com/track/3vgNRcq75TgLBNEHa7l3l7", artist: "Thomas Paul", role: WRIT_PROD_MIS_MAS_ROLE },
+      { url: "https://open.spotify.com/track/4TqFV77SI0u0WtiHsmUQPW", artist: "We Could Be Related", role: EVERYTHING_ROLE },
+      { url: "https://open.spotify.com/track/61Ny7MvlgnOqrIKwxhc11T", artist: "We Could Be Related", role: EVERYTHING_ROLE }
+    ];
 
-  const grid = document.getElementById("discographyGrid");
+    const grid = document.getElementById("discographyGrid");
 
-  async function fetchOEmbed(url) {
-    const res = await fetch(`https://open.spotify.com/oembed?url=${encodeURIComponent(url)}`);
-    if (!res.ok) throw new Error("Failed to fetch Spotify oEmbed");
-    return res.json();
+    // Scroll reveal observer (replays on every scroll)
+const observer = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("is-visible");
+      } else {
+        entry.target.classList.remove("is-visible");
+      }
+    });
+  },
+  {
+    threshold: 0.15
   }
+);
 
-  async function render() {
-    for (const item of releases) {
-      try {
-        const data = await fetchOEmbed(item.url);
 
-        // ✅ Track name: take from oEmbed title (works reliably)
-        const trackTitle = (data.title || "").trim() || "Untitled";
+    async function fetchOEmbed(url) {
+      const res = await fetch(`https://open.spotify.com/oembed?url=${encodeURIComponent(url)}`);
+      if (!res.ok) throw new Error("Failed to fetch Spotify oEmbed");
+      return res.json();
+    }
 
-        // ✅ Artist name: use your manual value (reliable)
-        const artistName = (item.artist || "").trim() || " ";
+    async function render() {
+      for (const item of releases) {
+        try {
+          const data = await fetchOEmbed(item.url);
 
-        const tile = document.createElement("a");
-        tile.className = "tile";
-        tile.href = item.url;
-        tile.target = "_blank";
-        tile.rel = "noreferrer";
+          const trackTitle = (data.title || "").trim() || "Untitled";
+          const artistName = (item.artist || "").trim() || "";
 
-        tile.innerHTML = `
-          <img src="${data.thumbnail_url}" alt="${trackTitle}">
-          <div class="meta">
-            <div class="title">${trackTitle}</div>
-            <div class="artist">${artistName}</div>
-            <div class="role">${item.role || DEFAULT_ROLE}</div>
-          </div>
-        `;
+          const tile = document.createElement("a");
+          tile.className = "tile";
+          tile.href = item.url;
+          tile.target = "_blank";
+          tile.rel = "noreferrer";
 
-        grid.appendChild(tile);
-      } catch (e) {
-        console.warn("Could not load:", item.url, e);
+          tile.innerHTML = `
+            <img src="${data.thumbnail_url}" alt="${trackTitle}">
+            <div class="meta">
+              <div class="title">${trackTitle}</div>
+              <div class="artist">${artistName}</div>
+              <div class="role">${item.role || DEFAULT_ROLE}</div>
+            </div>
+          `;
+
+          grid.appendChild(tile);
+
+          // trigger scroll animation
+          observer.observe(tile);
+
+        } catch (e) {
+          console.warn("Could not load:", item.url, e);
+        }
       }
     }
-  }
 
-  render();
-</script>
+    render();
+  </script>
 
 </body>
 </html>
