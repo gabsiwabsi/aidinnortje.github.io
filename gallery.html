@@ -8,6 +8,11 @@
 </head>
 
 <body>
+    <!-- Page Loader -->
+<div id="page-loader" aria-hidden="true">
+  <div class="loader-spinner"></div>
+</div>
+
   <header class="page-header">
     <div class="page-inner">
       <a class="page-brand" href="index.html">AIDIN NORTJE</a>
@@ -138,6 +143,14 @@
 
   galleryItems.forEach((item) => galleryObserver.observe(item));
 </script>
+
+<script>
+  window.addEventListener("load", () => {
+    const loader = document.getElementById("page-loader");
+    loader.classList.add("is-hidden");
+  });
+</script>
+
 
 </body>
 </html>

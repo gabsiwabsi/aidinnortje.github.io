@@ -8,6 +8,11 @@
 </head>
 
 <body>
+  <!-- Page Loader -->
+<div id="page-loader" aria-hidden="true">
+  <div class="loader-spinner"></div>
+</div>
+
 
   <!-- Page header (reuse your existing header if you want) -->
   <header class="page-header">
@@ -295,6 +300,14 @@
     </div>
 
   </main>
+
+  <script>
+  window.addEventListener("load", () => {
+    const loader = document.getElementById("page-loader");
+    loader.classList.add("is-hidden");
+  });
+</script>
+
 
 </body>
 </html>

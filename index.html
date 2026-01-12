@@ -8,6 +8,11 @@
 </head>
 
 <body>
+  <!-- Page Loader -->
+<div id="page-loader" aria-hidden="true">
+  <div class="loader-spinner"></div>
+</div>
+
   <!-- Name block (black container) -->
   <section class="name-block">
     <div class="name-inner">
@@ -138,6 +143,13 @@ const observer = new IntersectionObserver(
 
     render();
   </script>
+
+<script>
+  window.addEventListener("load", () => {
+    const loader = document.getElementById("page-loader");
+    loader.classList.add("is-hidden");
+  });
+</script>
 
 </body>
 </html>
