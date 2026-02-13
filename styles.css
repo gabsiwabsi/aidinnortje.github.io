@@ -775,16 +775,21 @@ body.is-loaded .name-title {
   max-width: 980px;
   margin: 0 auto;
   border-radius: 14px;
-  overflow: hidden;
+  /* overflow: hidden;   <-- REMOVE THIS (mobile iframe killer) */
   box-shadow: 0 8px 30px rgba(0,0,0,.25);
   background: #000;
 }
 
 .player-bar iframe{
   width: 100%;
-  height: 80px;
+  height: 152px;           /* ✅ was 80px */
   border: 0;
   display: block;
+  border-radius: 14px;     /* keep the rounded look here instead */
+}
+
+@media (max-width: 520px){
+  .player-bar iframe{ height: 152px; }  /* keep it consistent */
 }
 
 .player-close{
@@ -800,6 +805,7 @@ body.is-loaded .name-title {
   cursor: pointer;
   font-size: 18px;
   line-height: 28px;
+    z-index: 2;
 }
 
 .player-bar.is-hidden{
@@ -812,4 +818,13 @@ body.is-loaded .name-title {
   0%{ transform: scale(1); }
   40%{ transform: scale(1.02); }
   100%{ transform: scale(1); }
+}
+.spotify-embed {
+  width: 100%;
+  max-width: 520px;   /* optional */
+}
+
+.spotify-embed iframe{
+  width: 100%;
+  display: block;
 }
