@@ -59,12 +59,35 @@
     </div>
   </section>
 
-  <main class="container" id="credits">
-    <h2 class="section-title">SELECT DISCOGRAPHY</h2>
+  <main class="container" id="liveStreams">
+    <h2 class="section-title">TOTAL STREAMS</h2>
 
-    <!-- IMPORTANT: only ONE grid -->
-    <section class="grid" id="discographyGrid"></section>
+    <div class="streams-card">
+      <div class="streams-big" id="streamsTotal">—</div>
+
+      <div class="streams-sub">
+        Spotify = <span id="streamsSpotify">—</span>
+        <span class="dot"> </span>
+        YouTube = <span id="streamsYoutube">—</span>
+        <span class="dot"> </span>
+        Other = <span id="streamsOther">—</span>
+      </div>
+
+      <div class="streams-note" id="streamsStatus"></div>
+    </div>
   </main>
+
+
+<main class="container" id="credits">
+  <h2 class="section-title">SELECT DISCOGRAPHY</h2>
+
+  <section class="grid" id="discographyGrid"></section>
+
+  <div class="cta-row">
+    <a class="cta-btn" href="discography.html">VIEW FULL DISCOGRAPHY</a>
+  </div>
+</main>
+
 
   <!-- Sticky Spotify Player -->
   <div id="playerBar" class="player-bar is-hidden" aria-label="Spotify player">
@@ -207,6 +230,79 @@
       spotifyPlayer.src = ""; // stops playback
       playerBar.classList.add("is-hidden");
     });
+
+    // =============================
+    // LIVE STREAMS COUNTER (STATIC)
+    // =============================
+
+    // Put your static numbers here:
+    const STATIC_YOUTUBE_VIEWS = 7261455;
+    const STATIC_SPOTIFY_VIEWS = 34465585;
+    const STATIC_OTHER_VIEWS = 279299;
+
+    // Set the "last updated" date here:
+    const LAST_UPDATED = "12 Feb 2026";
+
+    function fmt(n) {
+      return Number(n).toLocaleString();
+    }
+
+    function fmt(n) {
+      return Number(n).toLocaleString();
+    }
+
+    function animateNumber(el, toValue, durationMs = 1600) {
+      const startValue = 0;
+      const start = performance.now();
+
+      // smooth, "premium" easing
+      function easeOutExpo(x) {
+        return x === 1 ? 1 : 1 - Math.pow(2, -10 * x);
+      }
+
+      function tick(t) {
+        const progress = Math.min(1, (t - start) / durationMs);
+        const eased = easeOutExpo(progress);
+
+        const value = Math.floor(startValue + (toValue - startValue) * eased);
+        el.textContent = fmt(value);
+
+        if (progress < 1) {
+          requestAnimationFrame(tick);
+        } else {
+          el.classList.add("counter-pop");
+          setTimeout(() => el.classList.remove("counter-pop"), 500);
+        }
+      }
+
+      requestAnimationFrame(tick);
+    }
+
+    (function initStaticStreams() {
+      const section = document.getElementById("liveStreams");
+
+      const elTotal = document.getElementById("streamsTotal");
+      const elYT = document.getElementById("streamsYoutube");
+      const elSpotify = document.getElementById("streamsSpotify");
+      const elOther = document.getElementById("streamsOther");
+      const elStatus = document.getElementById("streamsStatus");
+
+      if (!section || !elTotal || !elYT || !elSpotify || !elOther || !elStatus) return;
+
+      // Set status first (so it doesn't look empty)
+      elStatus.textContent = `Last updated: ${LAST_UPDATED}`;
+
+      // Turn on the reveal class slightly after page load, so it feels intentional
+      setTimeout(() => section.classList.add("counter-on"), 250);
+
+      const grandTotal = STATIC_YOUTUBE_VIEWS + STATIC_SPOTIFY_VIEWS + STATIC_OTHER_VIEWS;
+
+      // Staggered animations (feels slick)
+      setTimeout(() => animateNumber(elTotal, grandTotal, 1700), 350);
+      setTimeout(() => animateNumber(elSpotify, STATIC_SPOTIFY_VIEWS, 1300), 650);
+      setTimeout(() => animateNumber(elYT, STATIC_YOUTUBE_VIEWS, 1300), 850);
+      setTimeout(() => animateNumber(elOther, STATIC_OTHER_VIEWS, 1100), 1050);
+    })();
 
   </script>
 
