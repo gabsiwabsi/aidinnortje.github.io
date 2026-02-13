@@ -131,14 +131,81 @@ a { color: inherit; text-decoration: none; }
 .tile:hover .title,
 .tile:hover .artist,
 .tile:hover .role {
-  text-decoration: underline;
+  text-decoration: none;
 }
 
-/* Hover: underline*/
-.tile:hover .artist,
+
+/* Make the image wrapper able to hold an overlay */
+/* ===== Cover-only hover overlay ===== */
+.tile { cursor: pointer; }
+
+/* wrapper for the album art */
+.cover{
+  position: relative;
+  width: 100%;
+}
+
+/* keep your square look */
+.cover img{
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  display: block;
+  transition: filter 180ms ease, transform 180ms ease;
+}
+
+/* dim layer ONLY on the cover */
+.cover::before{
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.35);
+  opacity: 0;
+  transition: opacity 180ms ease;
+  pointer-events: none;
+}
+
+/* play triangle ONLY on the cover */
+.cover::after{
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 0;
+  height: 0;
+  transform: translate(-40%, -50%) scale(0.98);
+  border-left: 18px solid rgba(255,255,255,0.95);
+  border-top: 12px solid transparent;
+  border-bottom: 12px solid transparent;
+  opacity: 0;
+  transition: opacity 180ms ease, transform 180ms ease;
+  pointer-events: none;
+}
+
+/* hover/focus affects cover only */
+.tile:hover .cover::before,
+.tile:focus-visible .cover::before{ opacity: 1; }
+
+.tile:hover .cover::after,
+.tile:focus-visible .cover::after{
+  opacity: 1;
+  transform: translate(-40%, -50%) scale(1.04);
+}
+
+.tile:hover .cover img,
+.tile:focus-visible .cover img{
+  filter: grayscale(1) brightness(0.65) contrast(1.05);
+  transform: scale(1.01);
+}
+
+/* ===== Text “gentle jump out” ===== */
+.title, .artist, .role{
+  transition: transform 160ms ease, opacity 160ms ease;
+}
+
 .tile:hover .title,
-.tile:hover .role {
-  text-decoration: underline;
+.tile:focus-visible .title{
+  transform: translateY(-2px);
 }
 
 /* ===================== NAME BLOCK ===================== */
