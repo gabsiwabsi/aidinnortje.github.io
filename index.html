@@ -61,6 +61,20 @@
     <section class="grid" id="discographyGrid"></section>
   </main>
 
+  <!-- Sticky Spotify Player -->
+<div id="playerBar" class="player-bar is-hidden" aria-label="Spotify player">
+  <iframe
+    id="spotifyPlayer"
+    title="Spotify player"
+    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+    loading="lazy"
+    src=""
+  ></iframe>
+
+  <button id="closePlayer" class="player-close" aria-label="Close player">×</button>
+</div>
+
+
   <script>
     const DEFAULT_ROLE = "Writing, Production, Mixing";
     const WRIT_PROD_MIS_MAS_ROLE = "Writing, Production, Mixing, Mastering";
@@ -116,11 +130,17 @@ const observer = new IntersectionObserver(
           const trackTitle = (data.title || "").trim() || "Untitled";
           const artistName = (item.artist || "").trim() || "";
 
-          const tile = document.createElement("a");
-          tile.className = "tile";
-          tile.href = item.url;
-          tile.target = "_blank";
-          tile.rel = "noreferrer";
+          const tile = document.createElement("div");
+tile.className = "tile";
+tile.tabIndex = 0;
+tile.setAttribute("role", "button");
+tile.setAttribute("aria-label", `Play ${trackTitle} on Spotify`);
+
+tile.addEventListener("click", () => playTrack(item.url));
+tile.addEventListener("keydown", (e) => {
+  if (e.key === "Enter" || e.key === " ") playTrack(item.url);
+});
+
 
           tile.innerHTML = `
             <img src="${data.thumbnail_url}" alt="${trackTitle}">
@@ -143,6 +163,30 @@ const observer = new IntersectionObserver(
     }
 
     render();
+
+    const playerBar = document.getElementById("playerBar");
+const spotifyPlayer = document.getElementById("spotifyPlayer");
+const closePlayer = document.getElementById("closePlayer");
+
+function getTrackId(spotifyUrl) {
+  // supports: https://open.spotify.com/track/{id}
+  const m = spotifyUrl.match(/open\.spotify\.com\/track\/([a-zA-Z0-9]+)/);
+  return m ? m[1] : null;
+}
+
+function playTrack(spotifyUrl) {
+  const id = getTrackId(spotifyUrl);
+  if (!id) return;
+
+  spotifyPlayer.src = `https://open.spotify.com/embed/track/${id}`;
+  playerBar.classList.remove("is-hidden");
+}
+
+closePlayer.addEventListener("click", () => {
+  spotifyPlayer.src = ""; // stops playback
+  playerBar.classList.add("is-hidden");
+});
+
   </script>
 
 <script>
