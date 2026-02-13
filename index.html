@@ -174,13 +174,31 @@ function getTrackId(spotifyUrl) {
   return m ? m[1] : null;
 }
 
+function isMobile() {
+  return window.matchMedia("(max-width: 720px)").matches ||
+         /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+}
+
 function playTrack(spotifyUrl) {
   const id = getTrackId(spotifyUrl);
   if (!id) return;
 
-  spotifyPlayer.src = `https://open.spotify.com/embed/track/${id}`;
+  const embedUrl = `https://open.spotify.com/embed/track/${id}`;
+  const openUrl  = `https://open.spotify.com/track/${id}`;
+
+  if (isMobile()) {
+    // best UX on phones: open Spotify directly
+    window.open(openUrl, "_blank", "noopener,noreferrer");
+    return;
+  }
+
+  // desktop: use your sticky embed player
+  spotifyPlayer.src = embedUrl;
   playerBar.classList.remove("is-hidden");
+  playerBar.classList.add("pulse");
+  setTimeout(() => playerBar.classList.remove("pulse"), 900);
 }
+
 
 closePlayer.addEventListener("click", () => {
   spotifyPlayer.src = ""; // stops playback
