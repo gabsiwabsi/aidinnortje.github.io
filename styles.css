@@ -1565,6 +1565,7 @@ body.is-loaded .name-title {
   .about-page .hero-word{
     font-size: clamp(44px, 12vw, 66px) !important;
     transform: none !important;
+    margin-bottom: 6px !important; 
   }
 }
 
@@ -1602,23 +1603,61 @@ body.is-loaded .name-title {
     line-height: 1.05 !important;
   }
 }
+
 /* ===== tiny handwritten text shrink (phones only) ===== */
 @media (max-width: 700px){
 
-  /* the "I'M AIDIN / BORN IN / LIVING IN" block */
   .about-page .bio-lines{
     transform:
       translateX(calc(-50% + var(--bio-shift)))
       translateY(var(--bio-drop))
       rotate(-6deg)
-      scale(0.85);   /* ← magic */
+      scale(0.85);   /* smaller than 0.85 */
     transform-origin: center top;
   }
 
-  /* actual letters slightly tighter */
   .about-page .bio-line{
-    font-size: 0.85em !important;
-    letter-spacing: 0.04em !important;
+    font-size: 0.78em !important;      /* smaller letters */
+    letter-spacing: 0.03em !important; /* slightly tighter */
   }
 
+  .about-page .left-top .big{
+    font-size: 12px !important;  /* adjust down until it fits */
+  }
+
+}
+
+
+/* ===== EVEN LESS white space after ABOUT ME (mobile) ===== */
+@media (max-width: 700px){
+
+  /* Collage section: remove bottom air almost entirely */
+  .about-page .fuzzy-board{
+    padding-bottom: 0px !important;
+  }
+
+  .about-page .board{
+    padding-bottom: 0px !important;
+  }
+
+  /* Tighten the “A LITTLE MORE” + ABOUT ME stack */
+  .about-page .keep{
+    margin-top: 2px !important;
+    margin-bottom: 0px !important;
+  }
+
+  .about-page .hero-word{
+    margin-top: 6px !important;
+    margin-bottom: 0px !important;
+  }
+
+  /* Pull the paragraph section up */
+  .about-page .page-content{
+    padding-top: 6px !important;
+  }
+
+  /* If your paragraphs have default margins, compress them */
+  .about-page .about-body--center p{
+    margin-top: 10px !important;
+  }
 }
