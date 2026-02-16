@@ -1628,9 +1628,9 @@ body.is-loaded .name-title {
   }
 
   .about-page .left-top .big{
-    font-size: 10px !important;  /* adjust down until it fits */
+    font-size: 8px !important;  /* adjust down until it fits */
      display: inline-block;          /* lets transform work cleanly */
-    transform: translateX(6px);     /* nudge right without moving the other lines */
+    transform: translateX(20px);     /* nudge right without moving the other lines */
   }
 
 }
