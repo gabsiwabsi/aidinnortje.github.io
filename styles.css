@@ -1573,11 +1573,12 @@ body.is-loaded .name-title {
 
   /* force the 3-column “lane” layout: left text | photo | right text */
   .about-page .left-top{
-    grid-column: 1 / 5 !important;   /* left lane */
+    grid-column: 2 / 5 !important;   /* left lane */
     grid-row: 3 / 6 !important;
     justify-self: end !important;
     text-align: left !important;
-    padding-right: 10px !important;
+    padding-right: 6px !important;
+    padding-left: 6px !important;    /* safety so "I'M" can't get cut */
   }
 
   .about-page .top-photo{
@@ -1609,11 +1610,16 @@ body.is-loaded .name-title {
 
   .about-page .bio-lines{
     transform:
+    
       translateX(calc(-50% + var(--bio-shift)))
       translateY(var(--bio-drop))
       rotate(-6deg)
       scale(0.85);   /* smaller than 0.85 */
     transform-origin: center top;
+  }
+    /* optional: nudge the bio itself slightly right (micro adjustment) */
+  .about-page .bio-lines{
+    margin-left: 52% !important;     /* was 50% */
   }
 
   .about-page .bio-line{
