@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -7,18 +8,19 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 
-<body>
+<body class="about-page">
+
   <!-- Page Loader -->
-<div id="page-loader" aria-hidden="true">
-  <div class="loader-spinner"></div>
-</div>
+  <div id="page-loader" aria-hidden="true">
+    <div class="loader-spinner"></div>
+  </div>
 
   <!-- Simple top bar for internal pages -->
   <header class="page-header">
     <div class="page-inner">
       <a class="page-brand split-brand" href="index.html" aria-label="Home">
-  <span class="split-brand__text" data-text="AIDIN NORTJE">AIDIN NORTJE</span>
-</a>
+        <span class="split-brand__text" data-text="AIDIN NORTJE">AIDIN NORTJE</span>
+      </a>
 
 
       <nav class="page-nav" aria-label="Site navigation">
@@ -30,55 +32,105 @@
     </div>
   </header>
 
-  <main class="container page-content">
-    <h1 class="page-title">ABOUT</h1>
+  <section class="fuzzy-board" aria-label="About collage">
+    <div class="board">
 
-    <section class="about-grid">
-      <!-- Image -->
-      <div class="about-photo">
-        <img src="icons/about.jpg" alt="Image of Aidin Nortje" />
+      <!-- Top -->
+      <div class="hello">
+        <svg class="hello-arc" viewBox="0 0 400 140" aria-label="Hi there and welcome to my studio" role="img">
+          <defs>
+            <!-- Upward curve -->
+            <path id="arcUp" d="M 40 75 Q 200 25 360 75" />
+            <!-- Downward curve -->
+            <path id="arcDown" d="M 40 85 Q 200 135 360 85" />
+          </defs>
+
+          <text class="hello-hi">
+            <textPath href="#arcUp" startOffset="50%" text-anchor="middle">HI THERE</textPath>
+          </text>
+
+          <text class="hello-and" x="200" y="78" text-anchor="middle">—AND—</text>
+
+          <text class="hello-welcome">
+            <textPath href="#arcDown" startOffset="50%" text-anchor="middle">WELCOME TO MY STUDIO</textPath>
+          </text>
+        </svg>
       </div>
 
+      <div class="left-top hand small tiltL">
+        <span class="big bio-name">I'M AIDIN,</span><br>
+        <span class="bio-lines">
+          <span class="bio-line">BORN IN 2003</span><br>
+          <span class="bio-line">LIVING IN CAPE TOWN</span>
+        </span>
+      </div>
+
+      <img class="top-photo" src="icons/about.jpg" alt="Aidin portrait" />
+
+      <div class="right-top hand small tiltR">
+        MUSIC HAS<br>
+        <span class="bold">ALWAYS</span> BEEN MY<br>
+        <span class="underline">LANGUAGE</span>
+      </div>
+
+      <div class="keep hand tiny">a little more</div>
+
+      <!-- The big “FUZZY” / hero word -->
+      <h1 class="hero-word">ABOUT ME</h1>
+
+
+    </div>
+  </section>
+
+
+  <main class="container page-content">
+
+    <section class="about-grid">
+
       <!-- Text -->
-      <div class="about-body">
+      <div class="about-body about-body--center">
         <p class="about-lead">
-          
-
+          I’m a songwriter, producer, mixing engineer, and mastering engineer.
+          Music has always been my language, whether I’m writing, recording, or shaping a record from demo to final
+          master.
         </p>
 
         <p class="about-lead">
-          I’m Aidin, a Cape Town–based songwriter, producer, mixing engineer, and mastering engineer, born in 2003.
-          Music has always been my language — whether I’m writing, recording, or shaping a record from demo to final master.
+          I'm able to work across the full creative process, combining songwriting with technical precision to deliver
+          polished, industry-ready music. My approach is artist-first: every decision made focuses on emotion, identity, and impact of
+          the song.
         </p>
 
         <p class="about-lead">
-          I work across the full creative process, combining strong songwriting with technical precision to deliver polished,
-          industry-ready music. My approach is artist-first: every decision serves the emotion, identity, and impact of the song.
-        </p>
-
-        <p class="about-lead">
-          From intimate vocals to fully produced records, I focus on creating music that connects, translates, and lasts.
+          From intimate vocals to fully produced records, I focus on creating music that connects, translates, and
+          lasts.
         </p>
 
         <!-- Social icons -->
         <div class="about-socials" aria-label="Social links">
-          <a class="social-icon" href="https://www.instagram.com/aidin.nortje" target="_blank" rel="noreferrer" aria-label="Instagram">
+          <a class="social-icon" href="https://www.instagram.com/aidin.nortje" target="_blank" rel="noreferrer"
+            aria-label="Instagram">
             <img src="icons/binstgram.png" alt="Instagram" />
           </a>
 
-          <a class="social-icon" href="https://www.tiktok.com/@aidinnortje?_r=1&_t=ZS-930NK9iNa8j" target="_blank" rel="noreferrer" aria-label="TikTok">
+          <a class="social-icon" href="https://www.tiktok.com/@aidinnortje?_r=1&_t=ZS-930NK9iNa8j" target="_blank"
+            rel="noreferrer" aria-label="TikTok">
             <img src="icons/btiktok.png" alt="TikTok" />
           </a>
 
-          <a class="social-icon" href="https://www.youtube.com/@Aidin.Nortje" target="_blank" rel="noreferrer" aria-label="YouTube">
+          <a class="social-icon" href="https://www.youtube.com/@Aidin.Nortje" target="_blank" rel="noreferrer"
+            aria-label="YouTube">
             <img src="icons/byoutube.png" alt="YouTube" />
           </a>
 
-          <a class="social-icon" href="https://open.spotify.com/playlist/4zotRa3n7FXN8Esov5mG9v?si=V38nEeNWR2GVM8ruhIu9Iw" target="_blank" rel="noreferrer" aria-label="Spotify">
+          <a class="social-icon"
+            href="https://open.spotify.com/playlist/4zotRa3n7FXN8Esov5mG9v?si=V38nEeNWR2GVM8ruhIu9Iw" target="_blank"
+            rel="noreferrer" aria-label="Spotify">
             <img src="icons/bspotify.png" alt="Spotify" />
           </a>
 
-          <a class="social-icon" href="https://www.linkedin.com/in/aidin-nortje-2b5446305/" target="_blank" rel="noreferrer" aria-label="LinkedIn">
+          <a class="social-icon" href="https://www.linkedin.com/in/aidin-nortje-2b5446305/" target="_blank"
+            rel="noreferrer" aria-label="LinkedIn">
             <img src="icons/blinkedin.png" alt="LinkedIn" />
           </a>
         </div>
@@ -86,11 +138,12 @@
     </section>
   </main>
   <script>
-  window.addEventListener("load", () => {
-    const loader = document.getElementById("page-loader");
-    loader.classList.add("is-hidden");
-  });
-</script>
+    window.addEventListener("load", () => {
+      const loader = document.getElementById("page-loader");
+      loader.classList.add("is-hidden");
+    });
+  </script>
 
 </body>
+
 </html>

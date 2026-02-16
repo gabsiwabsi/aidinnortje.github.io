@@ -1,6 +1,23 @@
 /* Basic reset */
-html, body { overflow-x: hidden; }
-* { box-sizing: border-box; }
+
+:root{
+  --section-gap: 44px;
+  --gap-between: 34px;
+
+  /* Center the 2 lines under the "I'M AIDIN," word (around the middle/N-ish),
+   rotate slightly, and lower it a touch. */
+  --bio-shift: 12px;
+  --bio-drop: 4px;
+}
+
+html,
+body {
+  overflow-x: hidden;
+}
+
+* {
+  box-sizing: border-box;
+}
 
 body {
   margin: 0;
@@ -9,7 +26,10 @@ body {
   background: #fff;
 }
 
-a { color: inherit; text-decoration: none; }
+a {
+  color: inherit;
+  text-decoration: none;
+}
 
 /* Container — wider so the grid can feel “big” and centered */
 .container {
@@ -18,33 +38,18 @@ a { color: inherit; text-decoration: none; }
   padding: 56px 0 70px;
 }
 
-/* ===== Consistent vertical rhythm just for streams + discography ===== */
-:root{
-  --section-gap: 44px;   /* make both gaps identical */
-}
-
 /* Make the two sections use the same padding top/bottom */
-#liveStreams.container{
-  padding-top: 56px;               /* keep your standard */
+#liveStreams.container {
+  padding-top: 56px;
+  /* keep your standard */
   padding-bottom: var(--section-gap);
 }
 
-#credits.container{
+#credits.container {
   padding-top: var(--section-gap);
-  padding-bottom: 70px;            /* keep your standard */
+  padding-bottom: 70px;
+  /* keep your standard */
 }
-
-/* Make BOTH headings have same bottom spacing */
-#liveStreams .section-title,
-#credits .section-title{
-  margin: 10px 0 var(--section-gap);
-}
-
-/* Remove extra “double spacing” */
-#liveStreams .streams-card{ margin-top: 0; padding-top: 0; }
-#liveStreams .streams-big{ margin: 0 0 10px; }
-#liveStreams .streams-sub{ margin: 0; }
-#liveStreams .streams-note{ margin-top: 10px; }
 
 
 /* Section title centered */
@@ -57,7 +62,7 @@ a { color: inherit; text-decoration: none; }
 }
 
 /* ===================== live stream counter ===================== */
-.streams-card{
+.streams-card {
   margin: 18px auto 0;
   max-width: 720px;
   padding: 18px 18px 14px;
@@ -66,27 +71,19 @@ a { color: inherit; text-decoration: none; }
   box-shadow: none;
 }
 
-.streams-big{
-  font-size: clamp(32px, 5vw, 54px);
-  font-weight: 800;
-  letter-spacing: 0.5px;
-  text-align: center;
-  margin: 6px 0 8px;
-}
-
-.streams-sub{
+.streams-sub {
   text-align: center;
   opacity: 0.88;
   font-size: 14px;
   letter-spacing: 0.3px;
 }
 
-.streams-sub .dot{
+.streams-sub .dot {
   margin: 0 10px;
   opacity: 0.6;
 }
 
-.streams-note{
+.streams-note {
   margin-top: 10px;
   text-align: center;
   font-size: 12px;
@@ -94,32 +91,44 @@ a { color: inherit; text-decoration: none; }
 }
 
 /* ===== Make spacing consistent in the streams section ===== */
-#liveStreams .section-title{
-  margin-bottom: 28px;   /* controls gap: title -> number */
+#liveStreams .section-title {
+  margin-bottom: 28px;
+  /* controls gap: title -> number */
 }
 
-#liveStreams .streams-card{
-  margin-top: 0;         /* remove extra top gap */
-  padding-top: 0;        /* optional: tighter feel */
+#liveStreams .streams-card {
+  margin-top: 0;
+  /* remove extra top gap */
+  padding-top: 0;
+  /* optional: tighter feel */
 }
 
-#liveStreams .streams-big{
-  margin: 0 0 10px;      /* controls gap: number -> subline */
+#liveStreams .streams-big {
+  margin: 0 0 10px;
+  /* controls gap: number -> subline */
 }
 
-#liveStreams .streams-sub{
-  margin: 0;             /* prevents extra spacing */
+#liveStreams .streams-sub {
+  margin: 0;
+  /* prevents extra spacing */
 }
 
-#liveStreams .streams-note{
-  margin-top: 10px;      /* consistent small gap */
+#liveStreams .streams-note {
+  margin-top: 10px;
+  /* consistent small gap */
 }
 
 
 /* ===== Streams counter "cool load-in" (center-safe) ===== */
 
 /* Keep the big number as a full-width block so it can center */
-.streams-big{
+.streams-big {
+    font-size: clamp(32px, 5vw, 54px);
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  text-align: center;
+  margin: 6px 0 8px;
+
   width: 100%;
   text-align: center;
 
@@ -131,7 +140,7 @@ a { color: inherit; text-decoration: none; }
 }
 
 /* Only the little numbers below should be inline-block */
-.streams-sub span{
+.streams-sub span {
   display: inline-block;
 
   opacity: 0;
@@ -143,15 +152,15 @@ a { color: inherit; text-decoration: none; }
 
 /* when JS adds this class, numbers reveal */
 .counter-on .streams-big,
-.counter-on .streams-sub span{
+.counter-on .streams-sub span {
   opacity: 1;
   transform: translateY(0);
   filter: blur(0);
 }
 
 /* tiny glow "pop" at the end */
-.counter-pop{
-  text-shadow: 0 0 14px rgba(255,255,255,0.35);
+.counter-pop {
+  text-shadow: 0 0 14px rgba(255, 255, 255, 0.35);
   transform: translateY(0) scale(1.01);
 }
 
@@ -159,20 +168,30 @@ a { color: inherit; text-decoration: none; }
 .grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 48px 42px;            /* row-gap col-gap */
-  justify-items: center;     /* center each tile in its cell */
+  gap: 48px 42px;
+  /* row-gap col-gap */
+  justify-items: center;
+  /* center each tile in its cell */
   align-items: start;
 }
 
 /* Responsive fallback */
 @media (max-width: 1200px) {
-  .grid { grid-template-columns: repeat(3, 1fr); }
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
+
 @media (max-width: 850px) {
-  .grid { grid-template-columns: repeat(2, 1fr); }
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
+
 @media (max-width: 520px) {
-  .grid { grid-template-columns: 1fr; }
+  .grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* Tile */
@@ -206,6 +225,7 @@ a { color: inherit; text-decoration: none; }
     opacity: 0;
     transform: translateY(30px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -235,9 +255,9 @@ a { color: inherit; text-decoration: none; }
 }
 
 /* ARTIST NAME — clearly separated */
-.artist { 
-    display: block; 
-    margin-bottom: 12px;
+.artist {
+  display: block;
+  margin-bottom: 12px;
 }
 
 
@@ -265,16 +285,18 @@ a { color: inherit; text-decoration: none; }
 
 /* Make the image wrapper able to hold an overlay */
 /* ===== Cover-only hover overlay ===== */
-.tile { cursor: pointer; }
+.tile {
+  cursor: pointer;
+}
 
 /* wrapper for the album art */
-.cover{
+.cover {
   position: relative;
   width: 100%;
 }
 
 /* keep your square look */
-.cover img{
+.cover img {
   width: 100%;
   aspect-ratio: 1 / 1;
   object-fit: cover;
@@ -283,18 +305,18 @@ a { color: inherit; text-decoration: none; }
 }
 
 /* dim layer ONLY on the cover */
-.cover::before{
+.cover::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(0,0,0,0.35);
+  background: rgba(0, 0, 0, 0.35);
   opacity: 0;
   transition: opacity 180ms ease;
   pointer-events: none;
 }
 
 /* play triangle ONLY on the cover */
-.cover::after{
+.cover::after {
   content: "";
   position: absolute;
   left: 50%;
@@ -302,7 +324,7 @@ a { color: inherit; text-decoration: none; }
   width: 0;
   height: 0;
   transform: translate(-40%, -50%) scale(0.98);
-  border-left: 18px solid rgba(255,255,255,0.95);
+  border-left: 18px solid rgba(255, 255, 255, 0.95);
   border-top: 12px solid transparent;
   border-bottom: 12px solid transparent;
   opacity: 0;
@@ -312,43 +334,47 @@ a { color: inherit; text-decoration: none; }
 
 /* hover/focus affects cover only */
 .tile:hover .cover::before,
-.tile:focus-visible .cover::before{ opacity: 1; }
+.tile:focus-visible .cover::before {
+  opacity: 1;
+}
 
 .tile:hover .cover::after,
-.tile:focus-visible .cover::after{
+.tile:focus-visible .cover::after {
   opacity: 1;
   transform: translate(-40%, -50%) scale(1.04);
 }
 
 .tile:hover .cover img,
-.tile:focus-visible .cover img{
+.tile:focus-visible .cover img {
   filter: grayscale(1) brightness(0.65) contrast(1.05);
   transform: scale(1.01);
 }
 
 /* ===== Text “gentle jump out” ===== */
-.title, .artist, .role{
+.title,
+.artist,
+.role {
   transition: transform 160ms ease, opacity 160ms ease;
 }
 
 .tile:hover .title,
-.tile:focus-visible .title{
+.tile:focus-visible .title {
   transform: translateY(-2px);
 }
 
-.cta-row{
+.cta-row {
   display: flex;
   justify-content: center;
   margin-top: 44px;
 }
 
-.cta-btn{
+.cta-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   padding: 14px 22px;
   border-radius: 999px;
-  border: 1px solid rgba(0,0,0,0.25);
+  border: 1px solid rgba(0, 0, 0, 0.25);
   font-weight: 900;
   letter-spacing: 2px;
   font-size: 12px;
@@ -357,13 +383,13 @@ a { color: inherit; text-decoration: none; }
   transition: transform 160ms ease, border-color 160ms ease, opacity 160ms ease;
 }
 
-.cta-btn:hover{
+.cta-btn:hover {
   transform: translateY(-2px);
-  border-color: rgba(0,0,0,0.55);
+  border-color: rgba(0, 0, 0, 0.55);
 }
 
-.cta-btn:focus-visible{
-  outline: 2px solid rgba(0,0,0,0.35);
+.cta-btn:focus-visible {
+  outline: 2px solid rgba(0, 0, 0, 0.35);
   outline-offset: 6px;
   border-radius: 999px;
 }
@@ -408,7 +434,9 @@ a { color: inherit; text-decoration: none; }
   text-transform: uppercase;
 }
 
-.name-nav .nav-link + .nav-link { margin-left: 28px; }
+.name-nav .nav-link+.nav-link {
+  margin-left: 28px;
+}
 
 .name-nav .nav-link:hover {
   opacity: 1;
@@ -446,7 +474,8 @@ a { color: inherit; text-decoration: none; }
 
 /* Make the title feel extra “premium” */
 .name-title {
-  letter-spacing: 6px; /* starts wider on load */
+  letter-spacing: 6px;
+  /* starts wider on load */
   transition: opacity 800ms ease, transform 800ms ease, filter 800ms ease, letter-spacing 900ms ease;
 }
 
@@ -461,15 +490,22 @@ body.is-loaded .social-row {
 
 /* Tighten title letter spacing at the end */
 body.is-loaded .name-title {
-  letter-spacing: -1px; /* matches your original */
+  letter-spacing: -1px;
+  /* matches your original */
 }
 
 /* Stagger */
-.name-subtitle { transition-delay: 120ms; }
-.social-row    { transition-delay: 220ms; }
+.name-subtitle {
+  transition-delay: 120ms;
+}
+
+.social-row {
+  transition-delay: 220ms;
+}
 
 /* Respect reduced motion */
 @media (prefers-reduced-motion: reduce) {
+
   .name-title,
   .name-subtitle,
   .social-row {
@@ -487,20 +523,23 @@ body.is-loaded .name-title {
   display: flex;
   align-items: center;
   gap: 14px;
-  margin-top: 26px;   /* MORE space below subtitle */
+  margin-top: 26px;
+  /* MORE space below subtitle */
 }
 
 /* Icon button */
 .social-row .icon {
-  width: 38px;        /* smaller circle */
+  width: 38px;
+  /* smaller circle */
   height: 38px;
-  border: 1px solid rgba(255,255,255,0.6);
+  border: 1px solid rgba(255, 255, 255, 0.6);
   border-radius: 999px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   text-decoration: none;
-  flex-shrink: 0;     /* prevents squishing */
+  flex-shrink: 0;
+  /* prevents squishing */
 }
 
 .social-row .icon:hover {
@@ -509,17 +548,20 @@ body.is-loaded .name-title {
 
 /* Icon image */
 .social-row .icon img {
-  width: 18px;        /* smaller logo */
+  width: 18px;
+  /* smaller logo */
   height: 18px;
   object-fit: contain;
   display: block;
- /* if icons are black   filter: invert(1); */
+  /* if icons are black   filter: invert(1); */
 }
 
 
 /* Mobile tweaks */
 @media (max-width: 720px) {
-  .name-block { padding: 70px 0 60px; }
+  .name-block {
+    padding: 70px 0 60px;
+  }
 
   .name-nav {
     position: static;
@@ -530,18 +572,24 @@ body.is-loaded .name-title {
     margin-bottom: 18px;
 
     display: flex;
-    flex-wrap: wrap;          /* allow stacking */
-    gap: 10px 18px;           /* nice spacing (row, column) */
+    flex-wrap: wrap;
+    /* allow stacking */
+    gap: 10px 18px;
+    /* nice spacing (row, column) */
     justify-content: flex-start;
 
-    white-space: normal;      /* allow line breaks */
+    white-space: normal;
+    /* allow line breaks */
   }
 
-  .name-nav .nav-link + .nav-link {
-    margin-left: 0;           /* stop forcing a long row */
+  .name-nav .nav-link+.nav-link {
+    margin-left: 0;
+    /* stop forcing a long row */
   }
 
-  .tile { max-width: 320px; }
+  .tile {
+    max-width: 320px;
+  }
 }
 
 
@@ -549,18 +597,23 @@ body.is-loaded .name-title {
 .page-header {
   background: #0b0b0b;
   color: #fff;
-  border-bottom: 1px solid rgba(255,255,255,0.08);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-.page-inner {
-  width: min(1200px, 92%);
+/* INTERNAL PAGES HEADER — match HOME right-edge nav */
+.page-inner{
+  width: 100%;          /* let it span full header width */
+  max-width: none;      /* remove the 1200px clamp */
   margin: 0 auto;
+  padding: 0 4%;        /* same right edge spacing as home nav (right:4%) */
   height: 74px;
+
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 16px;
 }
+
 
 .page-brand {
   color: #fff;
@@ -627,25 +680,26 @@ body.is-loaded .name-title {
   right: -2px;
   top: 50%;
   height: 1px;
-  background: rgba(255,255,255,0);
+  background: rgba(255, 255, 255, 0);
   transform: translateY(-50%);
   transition: background 260ms ease;
 }
 
 .split-brand:hover::after,
 .split-brand:focus-visible::after {
-  background: rgba(255,255,255,0.55);
+  background: rgba(255, 255, 255, 0.55);
 }
 
 /* Accessibility */
 .split-brand:focus-visible {
-  outline: 2px solid rgba(255,255,255,0.45);
+  outline: 2px solid rgba(255, 255, 255, 0.45);
   outline-offset: 6px;
   border-radius: 6px;
 }
 
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
+
   .split-brand__text::before,
   .split-brand__text::after,
   .split-brand::after {
@@ -673,7 +727,9 @@ body.is-loaded .name-title {
   padding: 6px 0;
 }
 
-.page-nav .nav-link + .nav-link { margin-left: 28px; }
+.page-nav .nav-link+.nav-link {
+  margin-left: 28px;
+}
 
 .page-nav .nav-link:hover {
   opacity: 1;
@@ -706,7 +762,7 @@ body.is-loaded .name-title {
 @media (max-width: 720px) {
   .page-inner {
     height: auto;
-    padding: 16px 0;
+    padding: 16px 4%;
     flex-direction: column;
     align-items: flex-start;
   }
@@ -716,7 +772,9 @@ body.is-loaded .name-title {
     white-space: normal;
   }
 
-  .page-nav .nav-link + .nav-link { margin-left: 18px; }
+  .page-nav .nav-link+.nav-link {
+    margin-left: 18px;
+  }
 }
 
 /* ===================== FULL DISCOGRAPHY TABLE ===================== */
@@ -739,7 +797,7 @@ body.is-loaded .name-title {
 
 /* Rows */
 .discography-table tbody tr {
-  border-bottom: 1px solid rgba(0,0,0,0.1);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .discography-table td {
@@ -828,13 +886,6 @@ body.is-loaded .name-title {
   margin-top: 22px;
 }
 
-.about-photo img {
-  width: 100%;
-  display: block;
-  border-radius: 18px;
-  object-fit: cover;
-}
-
 .about-body {
   max-width: 720px;
 }
@@ -843,13 +894,6 @@ body.is-loaded .name-title {
   font-size: 18px;
   line-height: 1.75;
   margin: 0 0 16px;
-}
-
-.about-paragraph {
-  font-size: 16px;
-  line-height: 1.75;
-  margin: 0 0 14px;
-  opacity: 0.95;
 }
 
 /* Social icons row (matches your style) */
@@ -861,9 +905,10 @@ body.is-loaded .name-title {
 }
 
 .about-socials .social-icon {
-  width: 52px;              /* bigger circle */
+  width: 52px;
+  /* bigger circle */
   height: 52px;
-  border: 1px solid rgba(0,0,0,0.18);
+  border: 1px solid rgba(0, 0, 0, 0.18);
   border-radius: 50%;
   display: inline-flex;
   align-items: center;
@@ -872,12 +917,13 @@ body.is-loaded .name-title {
 }
 
 .about-socials .social-icon:hover {
-  border-color: rgba(0,0,0,0.45);
+  border-color: rgba(0, 0, 0, 0.45);
   transform: translateY(-2px);
 }
 
 .about-socials .social-icon img {
-  width: 35px;      /* icon size */
+  width: 35px;
+  /* icon size */
   height: 35px;
   object-fit: contain;
   display: block;
@@ -896,14 +942,14 @@ body.is-loaded .name-title {
 }
 
 /* ===== Gallery ===== */
-.gallery-grid{
+.gallery-grid {
   column-count: 3;
   column-gap: 18px;
   margin-top: 28px;
 }
 
 /* Gallery item */
-.gallery-item{
+.gallery-item {
   break-inside: avoid;
   margin: 0 0 18px;
   border-radius: 10px;
@@ -918,13 +964,13 @@ body.is-loaded .name-title {
 }
 
 /* Visible state (added by JS) */
-.gallery-item.is-visible{
+.gallery-item.is-visible {
   opacity: 1;
   transform: translateY(0);
 }
 
 /* Image */
-.gallery-item img{
+.gallery-item img {
   width: 100%;
   height: auto;
   display: block;
@@ -933,13 +979,13 @@ body.is-loaded .name-title {
 }
 
 /* Subtle hover like reference */
-.gallery-item:hover img{
+.gallery-item:hover img {
   transform: scale(1.02);
 }
 
 /* Respect reduced motion */
 @media (prefers-reduced-motion: reduce) {
-  .gallery-item{
+  .gallery-item {
     opacity: 1;
     transform: none;
     transition: none;
@@ -947,19 +993,24 @@ body.is-loaded .name-title {
 }
 
 /* Responsive */
-@media (max-width: 1100px){
-  .gallery-grid{ column-count: 2; }
+@media (max-width: 1100px) {
+  .gallery-grid {
+    column-count: 2;
+  }
 }
 
-@media (max-width: 650px){
-  .gallery-grid{ column-count: 1; }
+@media (max-width: 650px) {
+  .gallery-grid {
+    column-count: 1;
+  }
 }
 
 /* ===== Page Loader ===== */
 #page-loader {
   position: fixed;
   inset: 0;
-  background: #0b0b0b;        /* matches your site */
+  background: #0b0b0b;
+  /* matches your site */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -971,14 +1022,16 @@ body.is-loaded .name-title {
 .loader-spinner {
   width: 46px;
   height: 46px;
-  border: 3px solid rgba(255,255,255,0.25);
+  border: 3px solid rgba(255, 255, 255, 0.25);
   border-top-color: #fff;
   border-radius: 50%;
   animation: spin 0.9s linear infinite;
 }
 
 @keyframes spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 /* Hide loader */
@@ -994,7 +1047,7 @@ body.is-loaded .name-title {
   }
 }
 
-.player-bar{
+.player-bar {
   position: fixed;
   left: 16px;
   right: 16px;
@@ -1004,27 +1057,33 @@ body.is-loaded .name-title {
   margin: 0 auto;
   border-radius: 14px;
   /* overflow: hidden;   <-- REMOVE THIS (mobile iframe killer) */
-  box-shadow: 0 8px 30px rgba(0,0,0,.25);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, .25);
   background: #000;
 }
 
-.player-bar iframe{
+.player-bar iframe {
   width: 100%;
-  height: 152px;           /* ✅ was 80px */
+  height: 152px;
+  /* ✅ was 80px */
   border: 0;
   display: block;
-  border-radius: 14px;     /* keep the rounded look here instead */
+  border-radius: 14px;
+  /* keep the rounded look here instead */
 }
 
-@media (max-width: 520px){
-  .player-bar iframe{ height: 152px; }  /* keep it consistent */
+@media (max-width: 520px) {
+  .player-bar iframe {
+    height: 152px;
+  }
+
+  /* keep it consistent */
 }
 
-.player-close{
+.player-close {
   position: absolute;
   top: 6px;
   right: 10px;
-  background: rgba(0,0,0,.35);
+  background: rgba(0, 0, 0, .35);
   border: 0;
   color: #fff;
   width: 28px;
@@ -1033,39 +1092,438 @@ body.is-loaded .name-title {
   cursor: pointer;
   font-size: 18px;
   line-height: 28px;
-    z-index: 2;
+  z-index: 2;
 }
 
-.player-bar.is-hidden{
+.player-bar.is-hidden {
   display: none;
 }
-.player-bar.pulse{
+
+.player-bar.pulse {
   animation: pulse 0.9s ease;
 }
-@keyframes pulse{
-  0%{ transform: scale(1); }
-  40%{ transform: scale(1.02); }
-  100%{ transform: scale(1); }
-}
-.spotify-embed {
-  width: 100%;
-  max-width: 520px;   /* optional */
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+
+  40% {
+    transform: scale(1.02);
+  }
+
+  100% {
+    transform: scale(1);
+  }
 }
 
-.spotify-embed iframe{
+.spotify-embed {
+  width: 100%;
+  max-width: 520px;
+  /* optional */
+}
+
+.spotify-embed iframe {
   width: 100%;
   display: block;
 }
 
-/* ===== FINAL: make counter -> next title gap EXACT ===== */
-:root { --gap-between: 34px; } /* change this number until perfect */
-
 /* gap under the counter section */
-#liveStreams.container { padding-bottom: var(--gap-between) !important; }
+#liveStreams.container {
+  padding-bottom: var(--gap-between) !important;
+}
 
 /* remove extra space ABOVE the next section title */
-#credits.container { padding-top: 0 !important; }
-#credits .section-title { margin-top: 0 !important; }
+#credits.container {
+  padding-top: 0 !important;
+}
+
+#credits .section-title {
+  margin-top: 0 !important;
+}
 
 /* keep the title-to-grid spacing normal */
-#credits .section-title { margin-bottom: 50px; }
+#credits .section-title {
+  margin-bottom: 50px;
+}
+
+
+/* new about page spacing */
+
+/* FORCE the hello block to sit dead-center like the reference */
+.hello {
+  grid-column: 1 / -1;
+  /* span full width */
+  grid-row: 1 / 3;
+  /* keep it in the top area */
+  justify-self: center;
+  text-align: center;
+  margin-top: 6px;
+}
+
+
+/* Make each line centered and stacked cleanly */
+
+.hello-arc{
+  width: clamp(220px, 34vw, 360px);
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  overflow: visible;
+}
+
+.hello-arc text{
+  fill: #111;
+  font-family: ui-sans-serif, system-ui, Arial, Helvetica, sans-serif;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.hello-hi{
+  font-size: 26px;
+}
+
+.hello-welcome{
+  font-size: 18px;
+  opacity: 0.95;
+}
+
+.hello-and{
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  opacity: 0.85;
+}
+
+
+.fuzzy-board {
+  background: #fff;
+  padding: clamp(16px, 4vw, 48px) 0;
+}
+
+.board {
+  width: min(980px, 92vw);
+  margin: 0 auto;
+  position: relative;
+  /* tall collage feel */
+  padding: clamp(18px, 3vw, 28px) clamp(16px, 3vw, 28px) clamp(28px, 5vw, 56px);
+  border-radius: 18px;
+
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-auto-rows: minmax(18px, auto);
+  gap: clamp(8px, 1.6vw, 16px);
+}
+
+
+.bio-lines {
+  display: inline-block;
+  text-align: center;
+  margin-left: 50%;
+
+  transform:
+    translateX(calc(-50% + var(--bio-shift))) translateY(var(--bio-drop)) rotate(-6deg);
+
+  transform-origin: center top;
+}
+
+.bio-line {
+  display: inline-block;
+  white-space: nowrap;
+  /* stops "BORN IN 2003" splitting */
+}
+
+/* “handwritten” text blocks */
+.hand {
+  font-family: ui-sans-serif, system-ui, Arial, Helvetica, sans-serif;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #111;
+  line-height: 1.1;
+}
+
+.tiny {
+  font-size: clamp(10px, 1.4vw, 12px);
+}
+
+.small {
+  font-size: clamp(12px, 1.8vw, 14px);
+}
+
+.big {
+  font-size: clamp(16px, 2.3vw, 18px);
+}
+
+.bold {
+  font-weight: 800;
+}
+
+.muted {
+  opacity: .7;
+}
+
+.underline {
+  position: relative;
+  display: inline-block;
+}
+
+.underline::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -0.2em;
+  height: 0.18em;
+  background: #f2c94c;
+  /* pencil highlight vibe */
+  z-index: -1;
+  transform: rotate(-1.2deg);
+}
+
+.tiltL {
+  transform: rotate(-4deg);
+}
+
+.tiltR {
+  transform: rotate(3deg);
+}
+
+
+/* hero word – make it look “fuzzy-ish” */
+.hero-word {
+  grid-column: 1 / -1;
+  grid-row: 7 / 9 !important; 
+  z-index: 3;
+  position: relative;
+  /* << lock it */
+  text-align: center;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  font-size: clamp(52px, 9vw, 88px);
+  line-height: 0.95;
+    margin-top: 6px;
+  margin: clamp(6px, 1vw, 14px) 0;
+  text-shadow:
+    0 1px 0 rgba(0, 0, 0, .12),
+    1px 0 0 rgba(0, 0, 0, .10),
+    -1px 0 0 rgba(0, 0, 0, .10),
+    0 -1px 0 rgba(0, 0, 0, .10),
+    0 2px 0 rgba(0, 0, 0, .08);
+}
+
+
+/* Images */
+.board img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+}
+
+/* Positioning (desktop-ish) */
+
+/* Top side blocks — lock spacing from the center */
+.left-top {
+  grid-column: 1 / 6;
+  /* wider area */
+  grid-row: 3 / 6;
+  justify-self: end;
+  /* hug the center line */
+  text-align: left;
+  padding-right: clamp(10px, 2vw, 22px);
+  /* tiny breathing room from center */
+}
+
+.right-top {
+  grid-column: 8 / -1;
+  /* wider area */
+  grid-row: 3 / 6;
+  justify-self: start;
+  /* hug the center line */
+  text-align: left;
+  padding-left: clamp(10px, 2vw, 22px);
+}
+
+
+.keep{
+  grid-column: 1 / -1;
+  grid-row: 6 !important;       /* was 5 */
+  margin-top: 8px;
+  z-index: 3;
+  text-align: center;
+}
+
+/* Spread the two text blocks apart a bit */
+.left-top{
+  grid-column: 1 / 5;     /* was 1 / 6 */
+  grid-row: 3 / 6;        /* match your current top area */
+}
+
+.right-top{
+  grid-column: 9 / -1;    /* was 8 / -1 */
+  grid-row: 3 / 6;
+}
+
+/* New photo in the middle */
+.top-photo{
+  grid-column: 5 / 9;     /* center lane between left + right */
+  grid-row: 3 / 6 !important;   /* was 2 / 5 */
+  margin-top: 10px;
+  z-index: 1;
+
+  justify-self: center;
+  align-self: center;
+
+  width: min(240px, 22vw);
+  height: auto;
+  border-radius: 16px;
+  object-fit: cover;
+
+  transform: rotate(2deg);
+}
+
+/* Center the left + right text blocks to the middle of the photo */
+.left-top,
+.right-top{
+  grid-row: 3 / 6 !important;   /* same vertical band as the photo */
+  align-self: center !important; /* this is the key */
+}
+
+/* optional: tiny tweak if you want them a touch closer to the photo */
+.left-top{ padding-right: clamp(8px, 1.6vw, 18px) !important; }
+.right-top{ padding-left: clamp(8px, 1.6vw, 18px) !important; }
+
+
+.about-grid{
+  display: grid;
+  grid-template-columns: 1fr;  /* stack image then text */
+  gap: 28px;
+  margin-top: 22px;
+}
+
+.about-photo{
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+.about-body{
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+
+/* Mobile: stack into a nice “still-collage” flow */
+@media (max-width: 640px) {
+  .board {
+    grid-template-columns: repeat(6, 1fr);
+  }
+
+  .hello {
+    grid-column: 1 / -1;
+  }
+
+  .left-top {
+    grid-column: 1 / 4;
+  }
+
+  .right-top {
+    grid-column: 4 / -1;
+  }
+}
+
+.board {
+  column-gap: clamp(14px, 3vw, 34px);
+}
+
+/* ================= ABOUT PAGE SPACING FIX ================= */
+
+/* remove the natural gap below the header */
+.about-page .fuzzy-board{
+  padding-top: 6px;           /* reduce internal top air */
+}
+
+/* your board itself has a lot of top padding */
+.about-page .board{
+  transform: scale(1.20);          /* 🔥 try 1.28–1.40 */
+  transform-origin: top center;
+}
+
+/* the page-content (the real about text) was pushing everything down visually */
+.about-page .page-content{
+  padding-top: 10px;          /* was 48px */
+}
+
+/* remove the giant ABOUT heading gap (you already have the big collage ABOUT) */
+.about-page .page-title{
+  margin-top: 0;
+  margin-bottom: 12px;
+}
+
+/* ✅ If "ABOUT ME" is the collage word */
+.about-page .hero-word{
+  font-size: clamp(46px, 8vw, 84px) !important;
+}
+
+/* ===== FIX 1: Stop the top arc getting cut off (give it breathing room) ===== */
+.about-page .fuzzy-board{
+  padding-top: 36px !important;
+}
+.about-page .hello{
+  margin-top: 18px !important;
+}
+
+/* ===== FIX 2: Make the big "ABOUT ME" (hero-word) ACTUALLY smaller ===== */
+/* Because the parent .board is scaled up, we counter-scale the hero word */
+.about-page .hero-word{
+  font-size: clamp(44px, 7vw, 78px) !important;
+  transform: scale(0.78) !important;        /* counteracts the board scale */
+  transform-origin: center top !important;
+  margin: 10px 0 14px !important;
+}
+
+/* ===== FIX 3: Make the paragraph body smaller (the written bio) ===== */
+.about-page .page-text,
+.about-page .about-lead,
+.about-page .about-paragraph{
+  font-size: 14px !important;
+  line-height: 1.65 !important;
+  max-width: 640px !important;
+}
+/* ===== tighten space under the nav on ABOUT page ===== */
+
+/* reduce the white gap immediately under the header */
+.about-page .fuzzy-board{
+  padding-top: 10px !important;   /* was ~36px / clamp */
+}
+
+/* reduce the board’s internal top padding */
+.about-page .board{
+  padding-top: 8px !important;    /* pulls “HI THERE” up */
+}
+
+/* remove extra push on the hello block */
+.about-page .hello{
+  margin-top: 0 !important;
+}
+
+/* OPTIONAL: if it’s STILL too low, nudge the whole board up a touch */
+.about-page .board{
+  margin-top: -10px !important;   /* try -6px to -18px */
+}
+/* ===== Center ABOUT paragraph block ===== */
+.about-body--center{
+  margin: 0 auto;
+  text-align: center;
+  max-width: 720px;
+}
+
+.about-body--center .about-lead{
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 640px;          /* keeps lines from getting too wide */
+}
+
+/* center the social icons row too */
+.about-body--center .about-socials{
+  justify-content: center;
+}
