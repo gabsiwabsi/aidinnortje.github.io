@@ -1528,83 +1528,97 @@ body.is-loaded .name-title {
   justify-content: center;
 }
 
-/* ===================== ABOUT COLLAGE – MOBILE FIX ===================== */
-@media (max-width: 640px) {
+/* ================= ABOUT: MOBILE KEEP SAME LAYOUT, JUST SHRINK ================= */
+@media (max-width: 700px){
 
-  /* Stop the desktop grid behavior */
-  .about-page .board {
-    transform: none !important;         /* remove scale on mobile */
-    margin-top: 0 !important;
-    padding-top: 16px !important;
-  }
+  /* IMPORTANT: keep the collage as 12 columns (your placements are 12-col) */
+  .about-page .board{
+    grid-template-columns: repeat(12, 1fr) !important;
 
-  /* Switch to a simple vertical flow */
-  .about-page .board {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-auto-rows: auto;
-    gap: 18px;
-  }
-
-  /* Hello arc */
-  .about-page .hello {
-    grid-column: 1;
-    grid-row: auto;
-    margin: 0 auto 8px;
-  }
-
-  /* Image */
-  .about-page .top-photo {
-    grid-column: 1;
-    grid-row: auto;
-    width: min(220px, 70vw);
-    margin: 0 auto;
-    transform: rotate(0deg);
-  }
-
-  /* Left text block */
-  .about-page .left-top {
-    grid-column: 1;
-    grid-row: auto;
-    text-align: center;
-    justify-self: center;
-    padding: 0;
-    transform: rotate(0deg);
-  }
-
-  /* Right text block */
-  .about-page .right-top {
-    grid-column: 1;
-    grid-row: auto;
-    text-align: center;
-    justify-self: center;
-    padding: 0;
-    transform: rotate(0deg);
-  }
-
-  /* “A little more” */
-  .about-page .keep {
-    grid-column: 1;
-    grid-row: auto;
-    margin: 4px 0 6px;
-  }
-
-  /* Hero word */
-  .about-page .hero-word {
-    grid-column: 1;
-    grid-row: auto;
+    /* kill the mobile scaling + negative margin hacks */
     transform: none !important;
-    font-size: clamp(38px, 9vw, 56px) !important;
-    margin: 8px 0 12px !important;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    padding-top: 18px !important; /* keeps arc visible */
   }
 
-  /* Tighten the written bio spacing */
-  .about-page .page-content {
-    padding-top: 16px !important;
+  /* make the middle photo smaller so it never covers text */
+  .about-page .top-photo{
+    width: min(160px, 42vw) !important;
+    margin-top: 6px !important;
   }
 
-  .about-page .about-lead {
-    font-size: 15px !important;
-    line-height: 1.6 !important;
+  /* make the left + right “handwritten” blocks smaller */
+  .about-page .left-top,
+  .about-page .right-top{
+    font-size: 11px !important;
+    padding-left: 6px !important;
+    padding-right: 6px !important;
   }
+
+  /* slightly shrink the arc so it fits nicely */
+  .about-page .hello-arc{
+    width: min(300px, 78vw) !important;
+  }
+
+  /* keep ABOUT ME big but not insane on phones */
+  .about-page .hero-word{
+    font-size: clamp(44px, 12vw, 66px) !important;
+    transform: none !important;
+  }
+}
+
+@media (max-width: 700px){
+
+  /* force the 3-column “lane” layout: left text | photo | right text */
+  .about-page .left-top{
+    grid-column: 1 / 5 !important;   /* left lane */
+    grid-row: 3 / 6 !important;
+    justify-self: end !important;
+    text-align: left !important;
+    padding-right: 10px !important;
+  }
+
+  .about-page .top-photo{
+    grid-column: 5 / 9 !important;   /* center lane */
+    grid-row: 3 / 6 !important;
+    justify-self: center !important;
+    align-self: center !important;
+    width: min(150px, 40vw) !important;
+  }
+
+  .about-page .right-top{
+    grid-column: 9 / 13 !important;  /* right lane */
+    grid-row: 3 / 6 !important;
+    justify-self: start !important;
+    text-align: left !important;
+    padding-left: 10px !important;
+  }
+
+  /* make sure the text can shrink instead of spilling */
+  .about-page .left-top .hand,
+  .about-page .right-top .hand{
+    font-size: 10px !important;
+    line-height: 1.05 !important;
+  }
+}
+/* ===== tiny handwritten text shrink (phones only) ===== */
+@media (max-width: 700px){
+
+  /* the "I'M AIDIN / BORN IN / LIVING IN" block */
+  .about-page .bio-lines{
+    transform:
+      translateX(calc(-50% + var(--bio-shift)))
+      translateY(var(--bio-drop))
+      rotate(-6deg)
+      scale(0.85);   /* ← magic */
+    transform-origin: center top;
+  }
+
+  /* actual letters slightly tighter */
+  .about-page .bio-line{
+    font-size: 0.85em !important;
+    letter-spacing: 0.04em !important;
+  }
+
 }
