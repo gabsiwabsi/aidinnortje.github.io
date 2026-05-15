@@ -807,6 +807,7 @@ body.is-loaded .name-title {
 
 /* Artist column */
 .discography-table .artist {
+  display: table-cell;  
   font-weight: 800;
   letter-spacing: 0.5px;
   text-transform: capitalize;
