@@ -1,0 +1,450 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Artist Spotlight — Aidin Nortje</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+
+    /* ===================== SPOTLIGHT PAGE ===================== */
+
+    .spotlight-hero {
+      padding: 0 0 24px;
+      margin-bottom: 24px;
+    }
+
+    .spotlight-hero__eyebrow {
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      opacity: 0.4;
+      margin: 0 0 14px;
+    }
+
+    .spotlight-hero__title {
+      font-size: clamp(34px, 4vw, 52px);
+      font-weight: 900;
+      letter-spacing: 1px;
+      margin: 0 0 16px;
+      line-height: 1;
+    }
+
+    .spotlight-hero__sub {
+      font-size: 15px;
+      opacity: 0.55;
+      margin: 0;
+      max-width: 480px;
+      line-height: 1.6;
+    }
+
+    /* ===================== ARTIST TABS ===================== */
+
+    .spotlight-nav {
+      display: flex;
+      gap: 0;
+      margin-bottom: 56px;
+      border-bottom: 2px solid #111;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+    .spotlight-nav::-webkit-scrollbar { display: none; }
+
+    .spotlight-tab {
+      position: relative;
+      padding: 14px 0;
+      margin-right: 36px;
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #111;
+      opacity: 0.35;
+      white-space: nowrap;
+      transition: opacity 200ms ease;
+      font-family: inherit;
+      flex-shrink: 0;
+    }
+
+    .spotlight-tab::after {
+      content: "";
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: #111;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 250ms ease;
+    }
+
+    .spotlight-tab:hover { opacity: 0.7; }
+    .spotlight-tab.is-active { opacity: 1; }
+    .spotlight-tab.is-active::after { transform: scaleX(1); }
+
+    /* ===================== ARTIST PANEL ===================== */
+
+    .spotlight-panel { display: none; }
+
+    .spotlight-panel.is-active {
+      display: grid;
+      grid-template-columns: 340px 1fr;
+      gap: 72px;
+      align-items: start;
+      animation: panelIn 350ms ease forwards;
+    }
+
+    @keyframes panelIn {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .spotlight-panel.is-active { animation: none; }
+    }
+
+    /* ===================== LEFT COLUMN ===================== */
+
+    .spotlight-left {
+      position: sticky;
+      top: 32px;
+    }
+
+    .spotlight-photo-wrap {
+      position: relative;
+      margin-bottom: 28px;
+    }
+
+    .spotlight-photo-wrap::before {
+      content: "";
+      position: absolute;
+      inset: 10px -10px -10px 10px;
+      border: 1px solid rgba(0,0,0,0.12);
+      z-index: 0;
+      transition: inset 300ms ease;
+    }
+
+    .spotlight-photo-wrap:hover::before {
+      inset: 6px -14px -14px 6px;
+    }
+
+    .spotlight-photo {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      aspect-ratio: 3 / 4;
+      object-fit: cover;
+      display: block;
+      background: #f2f2f2;
+      filter: grayscale(15%);
+      transition: filter 300ms ease;
+    }
+
+    .spotlight-photo-wrap:hover .spotlight-photo {
+      filter: grayscale(0%);
+    }
+
+    .spotlight-id { margin-top: 24px; }
+
+    .spotlight-id__name {
+      font-size: 22px;
+      font-weight: 900;
+      letter-spacing: 1px;
+      margin: 0 0 4px;
+      text-transform: uppercase;
+    }
+
+    .spotlight-id__role {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      opacity: 0.45;
+      margin: 0 0 20px;
+    }
+
+    .spotlight-stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 24px;
+    }
+
+    .stat-pill {
+      display: flex;
+      flex-direction: column;
+      padding: 10px 16px;
+      border: 1px solid rgba(0,0,0,0.12);
+      gap: 2px;
+      transition: border-color 200ms ease, transform 200ms ease;
+    }
+
+    .stat-pill:hover {
+      border-color: rgba(0,0,0,0.4);
+      transform: translateY(-2px);
+    }
+
+    .stat-pill__num {
+      font-size: 18px;
+      font-weight: 900;
+      letter-spacing: 0.5px;
+      line-height: 1;
+    }
+
+    .stat-pill__label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      opacity: 0.45;
+    }
+
+    .spotlight-socials {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .spotlight-social {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 8px 14px;
+      border: 1px solid rgba(0,0,0,0.2);
+      text-decoration: none;
+      color: #111;
+      transition: background 180ms ease, color 180ms ease, border-color 180ms ease;
+    }
+
+    .spotlight-social:hover {
+      background: #111;
+      color: #fff;
+      border-color: #111;
+    }
+
+    /* ===================== RIGHT COLUMN ===================== */
+
+    .spotlight-blurb-lead {
+      font-size: clamp(20px, 2.5vw, 26px);
+      font-weight: 900;
+      line-height: 1.3;
+      letter-spacing: 0.3px;
+      margin: 0 0 28px;
+      padding-bottom: 28px;
+      border-bottom: 1px solid rgba(0,0,0,0.1);
+    }
+
+    .spotlight-blurb-body {
+      font-size: 15px;
+      line-height: 1.8;
+      opacity: 0.75;
+      margin: 0 0 48px;
+    }
+
+    .spotlight-section-label {
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      opacity: 0.4;
+      margin: 0 0 20px;
+    }
+
+    .spotlight-tracks {
+      list-style: none;
+      margin: 0 0 48px;
+      padding: 0;
+    }
+
+    .spotlight-track {
+      display: grid;
+      grid-template-columns: 28px 1fr auto;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(0,0,0,0.07);
+      text-decoration: none;
+      color: #111;
+      transition: padding-left 200ms ease;
+    }
+
+    .spotlight-track:hover { padding-left: 6px; }
+
+    .spotlight-track__num {
+      font-size: 11px;
+      font-weight: 700;
+      opacity: 0.3;
+      letter-spacing: 1px;
+      text-align: right;
+      transition: opacity 200ms ease;
+    }
+
+    .spotlight-track:hover .spotlight-track__num { opacity: 0.7; }
+
+    .spotlight-track__title {
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+    }
+
+    .spotlight-track__role {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      opacity: 0.4;
+    }
+
+    /* ===================== RESPONSIVE ===================== */
+
+    @media (max-width: 900px) {
+      .spotlight-panel.is-active {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .spotlight-left {
+        position: static;
+        display: grid;
+        grid-template-columns: 200px 1fr;
+        gap: 28px;
+        align-items: start;
+      }
+
+      .spotlight-photo-wrap { margin-bottom: 0; }
+    }
+
+    @media (max-width: 580px) {
+      .spotlight-left { grid-template-columns: 1fr; }
+      .spotlight-tab { margin-right: 24px; }
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- Page Loader -->
+  <div id="page-loader" aria-hidden="true">
+    <div class="loader-spinner"></div>
+  </div>
+
+  <header class="page-header">
+    <div class="page-inner">
+      <a class="page-brand split-brand" href="index.html" aria-label="Home">
+        <span class="split-brand__text" data-text="AIDIN NORTJE">AIDIN NORTJE</span>
+      </a>
+      <nav class="page-nav" aria-label="Site navigation">
+        <a class="nav-link" href="about.html">ABOUT</a>
+        <a class="nav-link" href="discography.html">FULL DISCOGRAPHY</a>
+        <a class="nav-link active" href="spotlight.html">ARTIST SPOTLIGHT</a>
+        <a class="nav-link" href="gallery.html">GALLERY</a>
+        <a class="nav-link" href="contact.html">CONTACT</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container page-content">
+
+    <!-- HERO -->
+    <div class="spotlight-hero">
+      <p class="spotlight-hero__eyebrow">Featured</p>
+      <h1 class="spotlight-hero__title">ARTIST SPOTLIGHT</h1>
+      <p class="spotlight-hero__sub">The team behind the records — a closer look at the people I create with.</p>
+    </div>
+
+    <!-- ARTIST TABS — add a button per artist -->
+    <nav class="spotlight-nav" role="tablist" aria-label="Select artist">
+      <button class="spotlight-tab is-active" role="tab" aria-selected="true"  aria-controls="panel-sophi" data-panel="panel-sophi">Sophi P</button>
+      <button class="spotlight-tab"           role="tab" aria-selected="false" aria-controls="panel-eva"   data-panel="panel-eva">Eva Marie</button>
+    </nav>
+
+    <!-- ============================================================
+         ARTIST PANELS
+         To add a new artist: copy one full panel block, give it a
+         unique id, add a matching tab button above, fill in the details.
+    ============================================================ -->
+
+    <!-- SOPHI P -->
+    <div class="spotlight-panel is-active" id="panel-sophi" role="tabpanel">
+      <div class="spotlight-left">
+        <div class="spotlight-photo-wrap">
+          <img class="spotlight-photo" src="icons/sophi.jpg" alt="Sophi P" onerror="this.style.background='#f2f2f2';this.removeAttribute('src')" />
+        </div>
+        <div class="spotlight-id">
+          <h2 class="spotlight-id__name">Sophi P</h2>
+          <p class="spotlight-id__role">Singer — Songwriter</p>
+          <div class="spotlight-stats">
+            <div class="stat-pill">
+              <span class="stat-pill__num">1</span>
+              <span class="stat-pill__label">Collabs</span>
+            </div>
+            <div class="stat-pill">
+              <span class="stat-pill__num">2025</span>
+              <span class="stat-pill__label">Since</span>
+            </div>
+          </div>
+          <div class="spotlight-socials">
+            <a class="spotlight-social" href="https://open.spotify.com/artist/2dQ6iKO8dda0JYZXlwJu1A?si=aQ5_B8_bQ8uINTHzZ4-b_Q" target="_blank" rel="noreferrer">Spotify</a>
+            <a class="spotlight-social" href="https://www.instagram.com/sophi.p.music?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noreferrer">Instagram</a>
+          </div>
+        </div>
+      </div>
+      <div class="spotlight-right">
+        <p class="spotlight-blurb-lead">"One of the most genuine and talented people I've ever worked with — and she's only 16."</p>
+        <p class="spotlight-blurb-body">
+          It started with a TikTok. My girlfriend Gabriella was scrolling one evening and a video of Sophi singing a cover came up. Gabi loves sending me singing videos but I'm normally not blown away — this time was different. The second she showed me I was hooked, and we spent the rest of the night watching everything else on her page. Gabi told me to DM her, so I did, she responded shortly after and we set up a phone call.
+          <br><br>
+          From there we got her into the studio and started developing her as an artist. A close friend, Mila, jumped in early to help with songwriting and was a big part of shaping those first sessions. While I focused on the music, Gabriella focused on filming & editing content, creative direction, and the early stages of building her brand. We started her a fresh Instagram, kept her posting covers, and then came the first release. Gabi put together a full content calendar rollout, and when "Paris" dropped, our goal was 10k streams in the first month. She hit it in four days. The song is still doing numbers and I couldn't be more proud of what we built together.
+          <br><br>
+          Then a friend of mine, Will Linley, asked to write with us — a few sessions in and we were making some real bangers. Around that time a mutual of mine and Will's, David Balshaw, reached out about potentially joining the team. Honestly, a no-brainer for me. I've looked up to David for the longest time.
+          <br><br>
+          Right now the team is myself and David as co-producers, Bella (David's wife) as lead content strategist and creative director, and Gabriella as co-content strategist and creative director. We are a very hands-on team working hard behind the scenes, and there is so much still to come. I cannot wait to share everything that is Sophi P with you.
+        </p>
+        <p class="spotlight-section-label">Songs We've Made Together</p>
+        <ul class="spotlight-tracks" aria-label="Tracks with Sophi P">
+          <li><a class="spotlight-track" href="https://open.spotify.com/track/4KHN6bK0ktzMQzaMdL7dlt?si=51f9eaf863cf4da2" target="_blank" rel="noreferrer"><span class="spotlight-track__num">01</span><span class="spotlight-track__title">Paris</span><span class="spotlight-track__role">w / p / mx / m</span></a></li>
+        </ul>
+      </div>
+    </div>
+
+  <script>
+    // Page loader — DOMContentLoaded so missing images don't block it
+    document.addEventListener("DOMContentLoaded", () => {
+      document.getElementById("page-loader").classList.add("is-hidden");
+    });
+
+    // Tab switching
+    const tabs   = Array.from(document.querySelectorAll(".spotlight-tab"));
+    const panels = Array.from(document.querySelectorAll(".spotlight-panel"));
+
+    tabs.forEach(tab => {
+      tab.addEventListener("click", () => {
+        const targetId = tab.dataset.panel;
+
+        tabs.forEach(t => {
+          t.classList.remove("is-active");
+          t.setAttribute("aria-selected", "false");
+        });
+        tab.classList.add("is-active");
+        tab.setAttribute("aria-selected", "true");
+
+        panels.forEach(p => p.classList.remove("is-active"));
+        document.getElementById(targetId).classList.add("is-active");
+      });
+    });
+  </script>
+
+</body>
+</html>

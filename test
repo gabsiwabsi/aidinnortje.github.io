@@ -1,0 +1,38 @@
+ <!-- EVA MARIE -->
+    <div class="spotlight-panel" id="panel-eva" role="tabpanel">
+      <div class="spotlight-left">
+        <div class="spotlight-photo-wrap">
+          <img class="spotlight-photo" src="icons/eva.jpg" alt="Eva Marie" onerror="this.style.background='#f2f2f2';this.removeAttribute('src')" />
+        </div>
+        <div class="spotlight-id">
+          <h2 class="spotlight-id__name">Eva Marie</h2>
+          <p class="spotlight-id__role">Singer — Songwriter</p>
+          <div class="spotlight-stats">
+            <div class="stat-pill">
+              <span class="stat-pill__num">3</span>
+              <span class="stat-pill__label">Collabs</span>
+            </div>
+            <div class="stat-pill">
+              <span class="stat-pill__num">2024</span>
+              <span class="stat-pill__label">Since</span>
+            </div>
+          </div>
+          <div class="spotlight-socials">
+            <a class="spotlight-social" href="https://open.spotify.com/artist/REPLACE" target="_blank" rel="noreferrer">Spotify</a>
+            <a class="spotlight-social" href="https://www.instagram.com/REPLACE" target="_blank" rel="noreferrer">Instagram</a>
+          </div>
+        </div>
+      </div>
+      <div class="spotlight-right">
+        <p class="spotlight-blurb-lead">"Write a short punchy pull-quote about Eva here."</p>
+        <p class="spotlight-blurb-body">Your blurb about Eva Marie goes here.</p>
+        <p class="spotlight-section-label">Songs We've Made Together</p>
+        <ul class="spotlight-tracks" aria-label="Tracks with Eva Marie">
+          <li><a class="spotlight-track" href="https://open.spotify.com/track/4Z4xlEo0iuCIp8JCdllzTY" target="_blank" rel="noreferrer"><span class="spotlight-track__num">01</span><span class="spotlight-track__title">Hate You</span><span class="spotlight-track__role">w / p / mx / m</span></a></li>
+          <li><a class="spotlight-track" href="https://open.spotify.com/track/5raoZ3PW91MUvcxlg0xBh7" target="_blank" rel="noreferrer"><span class="spotlight-track__num">02</span><span class="spotlight-track__title">IT GIRL</span><span class="spotlight-track__role">w / p / mx / m</span></a></li>
+          <li><a class="spotlight-track" href="https://open.spotify.com/track/7l1DJJieyLyc9CNP4AA11H" target="_blank" rel="noreferrer"><span class="spotlight-track__num">03</span><span class="spotlight-track__title">Adrenaline</span><span class="spotlight-track__role">w / p / mx / m</span></a></li>
+        </ul>
+      </div>
+    </div>
+
+  </main>
