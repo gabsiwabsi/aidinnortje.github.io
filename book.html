@@ -1,0 +1,900 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Book a Session — Aidin Nortje</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+
+    /* ===================== BOOKING PAGE ===================== */
+
+    .booking-wrap {
+      max-width: 900px;
+    }
+
+    .booking-hero {
+      padding: 0 0 40px;
+      border-bottom: 2px solid #111;
+      margin-bottom: 48px;
+    }
+
+    .booking-hero__eyebrow {
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      opacity: 0.4;
+      margin: 0 0 12px;
+    }
+
+    .booking-hero__title {
+      font-size: clamp(34px, 4vw, 52px);
+      font-weight: 900;
+      letter-spacing: 1px;
+      margin: 0 0 12px;
+      line-height: 1;
+    }
+
+    .booking-hero__sub {
+      font-size: 14px;
+      opacity: 0.55;
+      margin: 0;
+      line-height: 1.6;
+    }
+
+    /* ===================== SLOT INFO PILLS ===================== */
+
+    .slot-info {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 48px;
+    }
+
+    .slot-info__pill {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      padding: 12px 18px;
+      border: 1px solid rgba(0,0,0,0.12);
+    }
+
+    .slot-info__pill-num {
+      font-size: 16px;
+      font-weight: 900;
+      letter-spacing: 0.5px;
+    }
+
+    .slot-info__pill-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      opacity: 0.45;
+    }
+
+    /* ===================== CALENDAR ===================== */
+
+    .calendar-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 24px;
+    }
+
+    .calendar-month {
+      font-size: 18px;
+      font-weight: 900;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .calendar-nav {
+      display: flex;
+      gap: 8px;
+    }
+
+    .calendar-nav-btn {
+      width: 36px;
+      height: 36px;
+      border: 1px solid rgba(0,0,0,0.2);
+      background: transparent;
+      cursor: pointer;
+      font-size: 16px;
+      font-family: inherit;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 150ms ease, color 150ms ease;
+    }
+
+    .calendar-nav-btn:hover {
+      background: #111;
+      color: #fff;
+      border-color: #111;
+    }
+
+    .calendar-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 4px;
+      margin-bottom: 48px;
+    }
+
+    .calendar-day-label {
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      opacity: 0.4;
+      text-align: center;
+      padding-bottom: 10px;
+    }
+
+    .calendar-day {
+      aspect-ratio: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 700;
+      border: 1px solid transparent;
+      cursor: default;
+      position: relative;
+      transition: all 150ms ease;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .calendar-day.empty { border-color: transparent; }
+
+    .calendar-day.past {
+      opacity: 0.2;
+      cursor: not-allowed;
+    }
+
+    .calendar-day.weekend {
+      opacity: 0.2;
+      cursor: not-allowed;
+    }
+
+    .calendar-day.available {
+      border-color: rgba(0,0,0,0.12);
+      cursor: pointer;
+    }
+
+    .calendar-day.available:hover {
+      border-color: #111;
+      background: #111;
+      color: #fff;
+    }
+
+    .calendar-day.full {
+      border-color: rgba(0,0,0,0.08);
+      cursor: not-allowed;
+    }
+
+    .calendar-day.selected {
+      background: #111;
+      color: #fff;
+      border-color: #111;
+    }
+
+    .calendar-day.today {
+      font-weight: 900;
+    }
+
+    .calendar-day.today::after {
+      content: "";
+      position: absolute;
+      bottom: 5px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: currentColor;
+      opacity: 0.5;
+    }
+
+    /* Slot dots on calendar day */
+    .day-dots {
+      display: flex;
+      gap: 3px;
+    }
+
+    .day-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+    }
+
+    .day-dot.free { background: #111; opacity: 0.25; }
+    .calendar-day.selected .day-dot.free { background: #fff; opacity: 0.5; }
+    .day-dot.taken { background: #111; opacity: 0.08; }
+    .calendar-day.selected .day-dot.taken { background: #fff; opacity: 0.2; }
+
+    /* ===================== WEEK SLOTS VIEW ===================== */
+
+    .slots-section {
+      display: none;
+      margin-bottom: 48px;
+    }
+
+    .slots-section.is-visible { display: block; }
+
+    .slots-header {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .slots-date {
+      font-size: 18px;
+      font-weight: 900;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    .slots-back {
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      opacity: 0.4;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
+      padding: 0;
+      transition: opacity 150ms ease;
+    }
+
+    .slots-back:hover { opacity: 1; }
+
+    .slots-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .slot-card {
+      padding: 20px 24px;
+      border: 1px solid rgba(0,0,0,0.12);
+      cursor: pointer;
+      transition: all 180ms ease;
+      position: relative;
+    }
+
+    .slot-card:hover:not(.slot-card--taken) {
+      border-color: #111;
+    }
+
+    .slot-card.slot-card--selected {
+      background: #111;
+      color: #fff;
+      border-color: #111;
+    }
+
+    .slot-card.slot-card--taken {
+      opacity: 0.35;
+      cursor: not-allowed;
+    }
+
+    .slot-card__time {
+      font-size: 20px;
+      font-weight: 900;
+      letter-spacing: 0.5px;
+      margin-bottom: 4px;
+    }
+
+    .slot-card__label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      opacity: 0.5;
+      margin-bottom: 12px;
+    }
+
+    .slot-card__booked-by {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      opacity: 0.6;
+    }
+
+    .slot-card__status {
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      opacity: 0.4;
+    }
+
+    .slot-card--taken .slot-card__status { color: #111; }
+    .slot-card--selected .slot-card__status { opacity: 0.6; color: #fff; }
+
+    /* ===================== BOOKING FORM ===================== */
+
+    .form-section {
+      display: none;
+      border-top: 1px solid rgba(0,0,0,0.1);
+      padding-top: 40px;
+    }
+
+    .form-section.is-visible { display: block; }
+
+    .form-title {
+      font-size: 16px;
+      font-weight: 900;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin: 0 0 24px;
+    }
+
+    .form-summary {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 32px;
+    }
+
+    .form-summary__tag {
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 6px 12px;
+      background: #111;
+      color: #fff;
+    }
+
+    .form-fields {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .form-field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .form-field.full { grid-column: 1 / -1; }
+
+    .form-field label {
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      opacity: 0.5;
+    }
+
+    .form-field input,
+    .form-field textarea {
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: 700;
+      padding: 12px 14px;
+      border: 1px solid rgba(0,0,0,0.2);
+      background: transparent;
+      color: #111;
+      outline: none;
+      transition: border-color 150ms ease;
+    }
+
+    .form-field input:focus,
+    .form-field textarea:focus {
+      border-color: #111;
+    }
+
+    .form-field textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    .form-submit {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 28px;
+      background: #111;
+      color: #fff;
+      border: none;
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: opacity 200ms ease;
+    }
+
+    .form-submit:hover { opacity: 0.8; }
+    .form-submit:disabled { opacity: 0.4; cursor: not-allowed; }
+
+    /* ===================== SUCCESS STATE ===================== */
+
+    .booking-success {
+      display: none;
+      padding: 48px 0;
+      text-align: center;
+    }
+
+    .booking-success.is-visible { display: block; }
+
+    .booking-success__icon {
+      font-size: 40px;
+      margin-bottom: 20px;
+    }
+
+    .booking-success__title {
+      font-size: 28px;
+      font-weight: 900;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin: 0 0 12px;
+    }
+
+    .booking-success__sub {
+      font-size: 14px;
+      opacity: 0.55;
+      max-width: 420px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    /* ===================== ERROR / NOTICE ===================== */
+
+    .notice {
+      display: none;
+      padding: 14px 18px;
+      margin-bottom: 24px;
+      font-size: 13px;
+      font-weight: 700;
+      border-left: 3px solid #111;
+      background: rgba(0,0,0,0.04);
+    }
+
+    .notice.is-visible { display: block; }
+    .notice.is-error { border-color: #c0392b; background: rgba(192,57,43,0.05); color: #c0392b; }
+
+    /* ===================== LOADING ===================== */
+
+    .spinner {
+      display: inline-block;
+      width: 14px;
+      height: 14px;
+      border: 2px solid rgba(255,255,255,0.4);
+      border-top-color: #fff;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ===================== RESPONSIVE ===================== */
+
+    @media (max-width: 640px) {
+      .slots-grid { grid-template-columns: 1fr; }
+      .form-fields { grid-template-columns: 1fr; }
+      .form-field.full { grid-column: 1; }
+      .slot-info { gap: 8px; }
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <div id="page-loader" aria-hidden="true">
+    <div class="loader-spinner"></div>
+  </div>
+
+  <header class="page-header">
+    <div class="page-inner">
+      <a class="page-brand split-brand" href="index.html" aria-label="Home">
+        <span class="split-brand__text" data-text="AIDIN NORTJE">AIDIN NORTJE</span>
+      </a>
+      <!-- No public nav — this is a private page -->
+    </div>
+  </header>
+
+  <main class="container page-content">
+    <div class="booking-wrap">
+
+      <!-- HERO -->
+      <div class="booking-hero">
+        <p class="booking-hero__eyebrow">Private Booking</p>
+        <h1 class="booking-hero__title">BOOK A SESSION</h1>
+        <p class="booking-hero__sub">Select a date, pick your half-day slot, and submit your request. Aidin will confirm within 24 hours.</p>
+      </div>
+
+      <!-- INFO PILLS -->
+      <div class="slot-info">
+        <div class="slot-info__pill">
+          <span class="slot-info__pill-num">Morning</span>
+          <span class="slot-info__pill-label">10am — 2pm</span>
+        </div>
+        <div class="slot-info__pill">
+          <span class="slot-info__pill-num">Afternoon</span>
+          <span class="slot-info__pill-label">2pm — 6pm</span>
+        </div>
+        <div class="slot-info__pill">
+          <span class="slot-info__pill-num">2 max</span>
+          <span class="slot-info__pill-label">Slots per week</span>
+        </div>
+        <div class="slot-info__pill">
+          <span class="slot-info__pill-num">Mon — Fri</span>
+          <span class="slot-info__pill-label">Available days</span>
+        </div>
+      </div>
+
+      <!-- NOTICE -->
+      <div class="notice" id="notice"></div>
+
+      <!-- CALENDAR -->
+      <div id="calendar-view">
+        <div class="calendar-header">
+          <span class="calendar-month" id="calendar-month-label">June 2026</span>
+          <div class="calendar-nav">
+            <button class="calendar-nav-btn" id="prev-month" aria-label="Previous month">&#8592;</button>
+            <button class="calendar-nav-btn" id="next-month" aria-label="Next month">&#8594;</button>
+          </div>
+        </div>
+        <div class="calendar-grid" id="calendar-grid"></div>
+      </div>
+
+      <!-- SLOTS VIEW (shown after clicking a day) -->
+      <div class="slots-section" id="slots-section">
+        <div class="slots-header">
+          <span class="slots-date" id="slots-date-label"></span>
+          <button class="slots-back" id="slots-back">&#8592; Back to calendar</button>
+        </div>
+        <div class="slots-grid" id="slots-grid"></div>
+      </div>
+
+      <!-- BOOKING FORM (shown after picking a slot) -->
+      <div class="form-section" id="form-section">
+        <h2 class="form-title">Your Details</h2>
+        <div class="form-summary" id="form-summary"></div>
+        <div class="form-fields">
+          <div class="form-field">
+            <label for="field-name">Full Name</label>
+            <input type="text" id="field-name" placeholder="Your name" autocomplete="name" required />
+          </div>
+          <div class="form-field">
+            <label for="field-email">Email Address</label>
+            <input type="email" id="field-email" placeholder="your@email.com" autocomplete="email" required />
+          </div>
+          <div class="form-field full">
+            <label for="field-notes">Session Notes <span style="opacity:0.4;font-weight:400;text-transform:none;letter-spacing:0">(optional)</span></label>
+            <textarea id="field-notes" placeholder="What are you working on? Any goals for the session?"></textarea>
+          </div>
+        </div>
+        <button class="form-submit" id="form-submit">Request Booking</button>
+      </div>
+
+      <!-- SUCCESS -->
+      <div class="booking-success" id="booking-success">
+        <div class="booking-success__icon">✓</div>
+        <h2 class="booking-success__title">Request Sent</h2>
+        <p class="booking-success__sub">Your booking request has been submitted. Aidin will review it and you'll receive a confirmation email within 24 hours.</p>
+      </div>
+
+    </div>
+  </main>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      document.getElementById("page-loader").classList.add("is-hidden");
+    });
+
+    // ===================== CONFIG =====================
+    const SUPABASE_URL = "https://zmqpgkglkrhwkffqlfuk.supabase.co";
+    const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InptcXBna2dsa3Jod2tmZnFsZnVrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODExMzkxOTAsImV4cCI6MjA5NjcxNTE5MH0.wLt6mJ2LbctI0dWFm2cmyd4T_THTLKXR_Xm11JK_31o";
+
+    // ===================== STATE =====================
+    const today = new Date();
+    let viewYear  = today.getFullYear();
+    let viewMonth = today.getMonth();
+    let selectedDate = null;   // "YYYY-MM-DD"
+    let selectedSlot = null;   // "morning" | "afternoon"
+    let bookingsCache = {};    // { "YYYY-MM-DD": { morning: {booked, name}, afternoon: {booked, name} } }
+
+    // ===================== SUPABASE HELPERS =====================
+    async function fetchBookings(year, month) {
+      const from = `${year}-${String(month+1).padStart(2,"0")}-01`;
+      const to   = `${year}-${String(month+1).padStart(2,"0")}-31`;
+      try {
+        const res = await fetch(
+          `${SUPABASE_URL}/rest/v1/bookings?date=gte.${from}&date=lte.${to}&status=neq.rejected&select=date,slot,client_name,status`,
+          { headers: { "apikey": SUPABASE_ANON_KEY, "Authorization": `Bearer ${SUPABASE_ANON_KEY}` } }
+        );
+        const rows = await res.json();
+        bookingsCache = {};
+        rows.forEach(r => {
+          if (!bookingsCache[r.date]) bookingsCache[r.date] = {};
+          bookingsCache[r.date][r.slot] = { booked: true, name: r.client_name, status: r.status };
+        });
+      } catch(e) {
+        console.warn("Could not fetch bookings:", e);
+      }
+    }
+
+    async function submitBooking(name, email, notes) {
+      const res = await fetch(`${SUPABASE_URL}/rest/v1/bookings`, {
+        method: "POST",
+        headers: {
+          "apikey": SUPABASE_ANON_KEY,
+          "Authorization": `Bearer ${SUPABASE_ANON_KEY}`,
+          "Content-Type": "application/json",
+          "Prefer": "return=minimal"
+        },
+        body: JSON.stringify({
+          date: selectedDate,
+          slot: selectedSlot,
+          client_name: name,
+          client_email: email,
+          notes: notes,
+          status: "pending"
+        })
+      });
+      if (!res.ok) throw new Error("Booking failed");
+    }
+
+    async function countBookingsThisWeek(email) {
+      // Get Monday of current week containing selectedDate
+      const d = new Date(selectedDate);
+      const day = d.getDay(); // 0=Sun
+      const monday = new Date(d);
+      monday.setDate(d.getDate() - (day === 0 ? 6 : day - 1));
+      const friday = new Date(monday);
+      friday.setDate(monday.getDate() + 4);
+      const fmt = d => d.toISOString().split("T")[0];
+      try {
+        const res = await fetch(
+          `${SUPABASE_URL}/rest/v1/bookings?client_email=eq.${encodeURIComponent(email)}&date=gte.${fmt(monday)}&date=lte.${fmt(friday)}&status=neq.rejected&select=id`,
+          { headers: { "apikey": SUPABASE_ANON_KEY, "Authorization": `Bearer ${SUPABASE_ANON_KEY}` } }
+        );
+        const rows = await res.json();
+        return rows.length;
+      } catch(e) { return 0; }
+    }
+
+    // ===================== CALENDAR RENDER =====================
+    function renderCalendar() {
+      const label = document.getElementById("calendar-month-label");
+      const grid  = document.getElementById("calendar-grid");
+      const monthNames = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+      label.textContent = `${monthNames[viewMonth]} ${viewYear}`;
+      grid.innerHTML = "";
+
+      // Day labels
+      ["MON","TUE","WED","THU","FRI","SAT","SUN"].forEach(d => {
+        const el = document.createElement("div");
+        el.className = "calendar-day-label";
+        el.textContent = d;
+        grid.appendChild(el);
+      });
+
+      // First day offset (Mon=0)
+      const firstDay = new Date(viewYear, viewMonth, 1).getDay();
+      const offset = firstDay === 0 ? 6 : firstDay - 1;
+      for (let i = 0; i < offset; i++) {
+        const el = document.createElement("div");
+        el.className = "calendar-day empty";
+        grid.appendChild(el);
+      }
+
+      const daysInMonth = new Date(viewYear, viewMonth + 1, 0).getDate();
+      for (let d = 1; d <= daysInMonth; d++) {
+        const el = document.createElement("div");
+        const dateStr = `${viewYear}-${String(viewMonth+1).padStart(2,"0")}-${String(d).padStart(2,"0")}`;
+        const thisDate = new Date(viewYear, viewMonth, d);
+        const dow = thisDate.getDay(); // 0=Sun, 6=Sat
+        const isPast = thisDate < new Date(today.getFullYear(), today.getMonth(), today.getDate());
+        const isWeekend = dow === 0 || dow === 6;
+        const isToday = dateStr === today.toISOString().split("T")[0];
+        const dayBookings = bookingsCache[dateStr] || {};
+        const morningTaken = dayBookings.morning?.booked;
+        const afternoonTaken = dayBookings.afternoon?.booked;
+        const isFull = morningTaken && afternoonTaken;
+        const isSelected = dateStr === selectedDate;
+
+        el.className = "calendar-day";
+        if (isToday) el.classList.add("today");
+        if (isPast || isWeekend) {
+          el.classList.add(isWeekend ? "weekend" : "past");
+        } else if (isFull) {
+          el.classList.add("full");
+        } else {
+          el.classList.add("available");
+          el.addEventListener("click", () => selectDate(dateStr));
+        }
+        if (isSelected) el.classList.add("selected");
+
+        const numEl = document.createElement("span");
+        numEl.textContent = d;
+        el.appendChild(numEl);
+
+        // Slot dots
+        if (!isPast && !isWeekend) {
+          const dots = document.createElement("div");
+          dots.className = "day-dots";
+          ["morning","afternoon"].forEach(s => {
+            const dot = document.createElement("div");
+            dot.className = `day-dot ${dayBookings[s]?.booked ? "taken" : "free"}`;
+            dots.appendChild(dot);
+          });
+          el.appendChild(dots);
+        }
+
+        grid.appendChild(el);
+      }
+    }
+
+    // ===================== DATE SELECTION =====================
+    function selectDate(dateStr) {
+      selectedDate = dateStr;
+      selectedSlot = null;
+      renderCalendar();
+      renderSlots(dateStr);
+      document.getElementById("slots-section").classList.add("is-visible");
+      document.getElementById("form-section").classList.remove("is-visible");
+      document.getElementById("slots-section").scrollIntoView({ behavior: "smooth", block: "nearest" });
+    }
+
+    // ===================== SLOTS RENDER =====================
+    function renderSlots(dateStr) {
+      const label = document.getElementById("slots-date-label");
+      const grid  = document.getElementById("slots-grid");
+      const d = new Date(dateStr + "T12:00:00");
+      const dayNames = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+      const monthNames = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+      label.textContent = `${dayNames[d.getDay()]} ${d.getDate()} ${monthNames[d.getMonth()]}`;
+      grid.innerHTML = "";
+
+      const slots = [
+        { key: "morning",   time: "10:00 — 14:00", label: "Morning session" },
+        { key: "afternoon", time: "14:00 — 18:00", label: "Afternoon session" },
+      ];
+
+      const dayBookings = bookingsCache[dateStr] || {};
+
+      slots.forEach(s => {
+        const card = document.createElement("div");
+        card.className = "slot-card";
+        const isTaken = dayBookings[s.key]?.booked;
+
+        if (isTaken) {
+          card.classList.add("slot-card--taken");
+          card.innerHTML = `
+            <div class="slot-card__time">${s.time}</div>
+            <div class="slot-card__label">${s.label}</div>
+            <div class="slot-card__booked-by">Booked — ${dayBookings[s.key].name || "Client"}</div>
+            <div class="slot-card__status">Unavailable</div>`;
+        } else {
+          card.innerHTML = `
+            <div class="slot-card__time">${s.time}</div>
+            <div class="slot-card__label">${s.label}</div>
+            <div class="slot-card__status">Available</div>`;
+          card.addEventListener("click", () => selectSlot(s.key, card));
+        }
+        grid.appendChild(card);
+      });
+    }
+
+    // ===================== SLOT SELECTION =====================
+    function selectSlot(slot, cardEl) {
+      selectedSlot = slot;
+      document.querySelectorAll(".slot-card").forEach(c => c.classList.remove("slot-card--selected"));
+      cardEl.classList.add("slot-card--selected");
+      showForm();
+    }
+
+    function showForm() {
+      const section = document.getElementById("form-section");
+      section.classList.add("is-visible");
+      const summary = document.getElementById("form-summary");
+      const d = new Date(selectedDate + "T12:00:00");
+      const monthNames = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+      const slotLabel = selectedSlot === "morning" ? "Morning (10am–2pm)" : "Afternoon (2pm–6pm)";
+      summary.innerHTML = `
+        <span class="form-summary__tag">${d.getDate()} ${monthNames[d.getMonth()]} ${d.getFullYear()}</span>
+        <span class="form-summary__tag">${slotLabel}</span>`;
+      section.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    }
+
+    // ===================== FORM SUBMIT =====================
+    document.getElementById("form-submit").addEventListener("click", async () => {
+      const name  = document.getElementById("field-name").value.trim();
+      const email = document.getElementById("field-email").value.trim();
+      const notes = document.getElementById("field-notes").value.trim();
+      const notice = document.getElementById("notice");
+
+      notice.className = "notice";
+      notice.textContent = "";
+
+      if (!name || !email) {
+        notice.textContent = "Please fill in your name and email.";
+        notice.classList.add("is-visible", "is-error");
+        return;
+      }
+
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        notice.textContent = "Please enter a valid email address.";
+        notice.classList.add("is-visible", "is-error");
+        return;
+      }
+
+      const btn = document.getElementById("form-submit");
+      btn.disabled = true;
+      btn.innerHTML = `<span class="spinner"></span> Sending...`;
+
+      try {
+        // Check weekly limit
+        const weekCount = await countBookingsThisWeek(email);
+        if (weekCount >= 2) {
+          notice.textContent = "You've already booked 2 slots this week. Please choose a different week.";
+          notice.classList.add("is-visible", "is-error");
+          btn.disabled = false;
+          btn.textContent = "Request Booking";
+          return;
+        }
+
+        await submitBooking(name, email, notes);
+
+        // Show success
+        document.getElementById("calendar-view").style.display = "none";
+        document.getElementById("slots-section").style.display = "none";
+        document.getElementById("form-section").style.display = "none";
+        document.getElementById("booking-success").classList.add("is-visible");
+
+      } catch(e) {
+        notice.textContent = "Something went wrong. Please try again.";
+        notice.classList.add("is-visible", "is-error");
+        btn.disabled = false;
+        btn.textContent = "Request Booking";
+      }
+    });
+
+    // ===================== BACK BUTTON =====================
+    document.getElementById("slots-back").addEventListener("click", () => {
+      selectedDate = null;
+      selectedSlot = null;
+      renderCalendar();
+      document.getElementById("slots-section").classList.remove("is-visible");
+      document.getElementById("form-section").classList.remove("is-visible");
+    });
+
+    // ===================== MONTH NAV =====================
+    document.getElementById("prev-month").addEventListener("click", async () => {
+      viewMonth--;
+      if (viewMonth < 0) { viewMonth = 11; viewYear--; }
+      await fetchBookings(viewYear, viewMonth);
+      renderCalendar();
+    });
+
+    document.getElementById("next-month").addEventListener("click", async () => {
+      viewMonth++;
+      if (viewMonth > 11) { viewMonth = 0; viewYear++; }
+      await fetchBookings(viewYear, viewMonth);
+      renderCalendar();
+    });
+
+    // ===================== INIT =====================
+    (async () => {
+      await fetchBookings(viewYear, viewMonth);
+      renderCalendar();
+    })();
+
+  </script>
+</body>
+</html>
