@@ -247,13 +247,10 @@
     // =============================
     // LIVE STREAMS COUNTER (STATIC)
     // =============================
-
-    // Put your static numbers here:
     const STATIC_YOUTUBE_VIEWS = 8827774;
     const STATIC_SPOTIFY_VIEWS = 40724951;
     const STATIC_OTHER_VIEWS = 297589;
 
-    // Set the "last updated" date here:
     const LAST_UPDATED = "12 June 2026";
 
     function fmt(n) {
@@ -268,7 +265,6 @@
       const startValue = 0;
       const start = performance.now();
 
-      // smooth, "premium" easing
       function easeOutExpo(x) {
         return x === 1 ? 1 : 1 - Math.pow(2, -10 * x);
       }
@@ -305,7 +301,7 @@
       // Set status first (so it doesn't look empty)
       elStatus.textContent = `Last updated: ${LAST_UPDATED}`;
 
-      // Turn on the reveal class slightly after page load, so it feels intentional
+      // turn on the reveal class slightly after page load, so it feels more intentional
       setTimeout(() => section.classList.add("counter-on"), 250);
 
       const grandTotal = STATIC_YOUTUBE_VIEWS + STATIC_SPOTIFY_VIEWS + STATIC_OTHER_VIEWS;
