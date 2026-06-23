@@ -1,7 +1,18 @@
-<!doctype html>
+<!-- my amazing girfriend (@ghassenstein) made this epic website -->
+ <!doctype html>
 <html lang="en">
 
 <head>
+  <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XY6KYPXXYN"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-XY6KYPXXYN');
+</script>
+
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Aidin Nortje</title>
@@ -90,7 +101,7 @@
 </main>
 
 
-  <!-- Sticky Spotify Player -->
+  <!-- Sticky Spotify Player thingy-->
   <div id="playerBar" class="player-bar is-hidden" aria-label="Spotify player">
     <iframe id="spotifyPlayer" title="Spotify player"
       allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" src=""></iframe>
@@ -236,14 +247,11 @@
     // =============================
     // LIVE STREAMS COUNTER (STATIC)
     // =============================
+    const STATIC_YOUTUBE_VIEWS = 8848374;
+    const STATIC_SPOTIFY_VIEWS = 40860481;
+    const STATIC_OTHER_VIEWS = 297589;
 
-    // Put your static numbers here:
-    const STATIC_YOUTUBE_VIEWS = 8516718;
-    const STATIC_SPOTIFY_VIEWS = 39520358;
-    const STATIC_OTHER_VIEWS = 297473;
-
-    // Set the "last updated" date here:
-    const LAST_UPDATED = "22 May 2026";
+    const LAST_UPDATED = "12 June 2026";
 
     function fmt(n) {
       return Number(n).toLocaleString();
@@ -257,7 +265,6 @@
       const startValue = 0;
       const start = performance.now();
 
-      // smooth, "premium" easing
       function easeOutExpo(x) {
         return x === 1 ? 1 : 1 - Math.pow(2, -10 * x);
       }
@@ -294,7 +301,7 @@
       // Set status first (so it doesn't look empty)
       elStatus.textContent = `Last updated: ${LAST_UPDATED}`;
 
-      // Turn on the reveal class slightly after page load, so it feels intentional
+      // turn on the reveal class slightly after page load, so it feels more intentional
       setTimeout(() => section.classList.add("counter-on"), 250);
 
       const grandTotal = STATIC_YOUTUBE_VIEWS + STATIC_SPOTIFY_VIEWS + STATIC_OTHER_VIEWS;
